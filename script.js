@@ -728,9 +728,9 @@ getRankGlow(rank) {
 getRankIcon(rank) {
     const icons = {
         'SSL': 'ssl',
-        'Grand Champion I': 'grand_champion_3',
+        'Grand Champion III': 'grand_champion_3',
         'Grand Champion II': 'grand_champion_2',
-        'Grand Champion III': 'grand_champion_1',
+        'Grand Champion I': 'grand_champion_1',
         'Champion III': 'champion_3',
         'Champion II': 'champion_2',
         'Champion I': 'champion_1',
@@ -757,9 +757,9 @@ getRankIcon(rank) {
 getRankEmoji(rank) {
     const emojis = {
         'SSL': '👑',
-        'Grand Champion I': '🏆',
-        'Grand Champion II': '🏆',
         'Grand Champion III': '🏆',
+        'Grand Champion II': '🏆',
+        'Grand Champion I': '🏆',
         'Champion III': '🥇',
         'Champion II': '🥈',
         'Champion I': '🥉',
