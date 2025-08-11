@@ -616,9 +616,9 @@ displayLeaderboard(leaderboardData) {
 // script.js
 calculateRank(accuracy) {
     if (accuracy >= 95.45) return 'SSL';
-    if (accuracy >= 90.91) return 'Grand Champion 3';
-    if (accuracy >= 86.36) return 'Grand Champion 2';
-    if (accuracy >= 81.82) return 'Grand Champion 1';
+    if (accuracy >= 90.91) return 'Grand Champion III';
+    if (accuracy >= 86.36) return 'Grand Champion II';
+    if (accuracy >= 81.82) return 'Grand Champion I';
     if (accuracy >= 77.27) return 'Champion III';
     if (accuracy >= 72.73) return 'Champion II';
     if (accuracy >= 68.18) return 'Champion I';
@@ -684,7 +684,9 @@ calculateRank(accuracy) {
     getRankColor(rank) {
         const colors = {
             'SSL': '#ffffff',
-            'Grand Champion': '#f50246',
+            'Grand Champion III': '#9361dc',
+            'Grand Champion II': '#9361dc',
+            'Grand Champion I': '#9361dc',
             'Champion III': '#9361dc',
             'Champion II': '#9361dc',
             'Champion I': '#9361dc',
@@ -713,9 +715,9 @@ getRankGlow(rank) {
     switch (rank) {
         case 'SSL':
             return '0 0 20px #ffffff, 0 0 40px #ffffff';
-        case 'Grand Champion 1':
-        case 'Grand Champion 2':
-        case 'Grand Champion 3':
+        case 'Grand Champion I':
+        case 'Grand Champion II':
+        case 'Grand Champion III':
             return '0 0 15px #f50246, 0 0 30px #f50246';
         default:
             return 'none';
@@ -726,9 +728,9 @@ getRankGlow(rank) {
 getRankIcon(rank) {
     const icons = {
         'SSL': 'ssl',
-        'Grand Champion 1': 'grand_champion_3',
-        'Grand Champion 2': 'grand_champion_2',
-        'Grand Champion 3': 'grand_champion_1',
+        'Grand Champion I': 'grand_champion_3',
+        'Grand Champion II': 'grand_champion_2',
+        'Grand Champion III': 'grand_champion_1',
         'Champion III': 'champion_3',
         'Champion II': 'champion_2',
         'Champion I': 'champion_1',
@@ -755,9 +757,9 @@ getRankIcon(rank) {
 getRankEmoji(rank) {
     const emojis = {
         'SSL': '👑',
-        'Grand Champion 1': '🏆',
-        'Grand Champion 2': '🏆',
-        'Grand Champion 3': '🏆',
+        'Grand Champion I': '🏆',
+        'Grand Champion II': '🏆',
+        'Grand Champion III': '🏆',
         'Champion III': '🥇',
         'Champion II': '🥈',
         'Champion I': '🥉',
