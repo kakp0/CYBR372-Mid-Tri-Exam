@@ -163,10 +163,17 @@ body::before {
     background: transparent;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    color: var(--text-secondary);
+    color: var(--rank-color-base); /* This makes the icon use the rank color */
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 80px;
+}
+
+/* Add this new rule */
+.nav-icon svg {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
