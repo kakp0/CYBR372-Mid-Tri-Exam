@@ -1020,7 +1020,7 @@ getRankGlow(rank) {
         }
         
         if (this.quiz.isComplete) {
-            this.showQuizResults();
+            this.();
             return;
         }
         
@@ -1185,7 +1185,7 @@ getRankGlow(rank) {
         this.user.sessionQuestions = 0;
         
         // Show integrated results
-        this.showQuizResults();
+        this.();
         this.showNotification('Quiz completed! Check your results.', 'success');
     },
     
@@ -1226,7 +1226,13 @@ getRankGlow(rank) {
             
             // Update final results display
             const finalCorrect = document.getElementById('finalCorrect');
-            const finalAccuracy = document.getElementById('finalAccuracy');
+    const finalAccuracy = document.getElementById('finalAccuracy');
+
+    if (finalAccuracy) {
+        // This ensures the rolling accuracy is always displayed
+        const rollingAccuracy = this.calculateRollingAccuracy();
+        finalAccuracy.textContent = `Rolling: ${rollingAccuracy.toFixed(1)}%`;
+    }
             const finalPerformance = document.getElementById('finalPerformance');
             const finalRankIcon = document.getElementById('finalRankIcon');
             const finalRankName = document.getElementById('finalRankName');
