@@ -39,14 +39,15 @@ const app = {
     
     // Firebase configuration (ready for integration)
     firebase: {
-        config: {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        },
+// script.js
+config: {
+    apiKey: 'AIzaSyBtpTMa10YEOE_Q789s7dtUu6kThi31fBI',
+    authDomain: 'cybr372-practice-test-ecfc5.firebaseapp.com',
+    projectId: 'cybr372-practice-test-ecfc5',
+    storageBucket: 'cybr372-practice-test-ecfc5.firebasestorage.app',
+    messagingSenderId: '1090942184560',
+    appId: '1:1090942184560:web:461ffdd986b3d1e95a98b5'
+},
         db: null,
         isConfigured: false
     },
