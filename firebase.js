@@ -3,18 +3,18 @@
 
 // Firebase Configuration - Replace with your Firebase config
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCiqbsZF8o50VvxCh1bApQ2vyN27dnMxG8",
+  authDomain: "cybr372-practice-test.firebaseapp.com",
+  projectId: "cybr372-practice-test",
+  storageBucket: "cybr372-practice-test.firebasestorage.app",
+  messagingSenderId: "170767840324",
+  appId: "1:170767840324:web:9e3155a53b45172b71f811",
+  measurementId: "G-2LGHCRF1PK"
 };
 
 // Initialize Firebase
 // Uncomment the following lines when you have your Firebase config
-/*
+
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const auth = firebase.auth();
@@ -154,5 +154,4 @@ Example Security Rules for Realtime Database:
     }
   }
 }
-*/
 */
