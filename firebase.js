@@ -3,7 +3,7 @@
 
 // Firebase Configuration - Replace with your Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyCiqbsZF8o50VvxCh1bApQ2vyN27dnMxG8",
+  apiKey: "",
   authDomain: "cybr372-practice-test.firebaseapp.com",
   projectId: "cybr372-practice-test",
   storageBucket: "cybr372-practice-test.firebasestorage.app",
