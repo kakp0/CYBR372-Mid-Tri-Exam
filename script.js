@@ -477,9 +477,9 @@ async loadLeaderboardFromFirebase() {
         this.bindEvents();
         
         // Initialize Firebase if configured
-        if (this.firebase && this.firebase.isConfigured) {
+      
             this.initializeFirebase();
-        }
+        
         
         this.updateUI();
         this.showSection('profile');
