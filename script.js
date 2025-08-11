@@ -1030,7 +1030,7 @@ getRankEmoji(rank) {
         }
         
         if (this.quiz.isComplete) {
-            this.();
+            this.showQuizResults();
             return;
         }
         
