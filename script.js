@@ -102,59 +102,39 @@ config: {
     // REAL-TIME STAT UPDATES
     // =============================================
     
-    updateLiveStats() {
-        const correctAnswers = this.quiz.userAnswers.filter(answer => answer.isCorrect).length;
-        const totalAnswered = this.quiz.userAnswers.length;
-        const sessionAccuracy = totalAnswered > 0 ? (correctAnswers / totalAnswered) * 100 : 0;
-        
-        // Update live accuracy display with session accuracy
-        const liveAccuracy = document.getElementById('liveAccuracy');
-        if (liveAccuracy) {
-            const oldAccuracy = parseFloat(liveAccuracy.textContent) || 0;
-            const newAccuracy = sessionAccuracy;
-            
-            // Show accuracy change animation
-            this.showAccuracyChange(oldAccuracy, newAccuracy);
-            
-            // Update the display with animation
-            liveAccuracy.style.transition = 'all 0.5s ease';
-            liveAccuracy.textContent = `${newAccuracy.toFixed(1)}%`;
-            
-            // Add pulse animation for significant changes
-            if (Math.abs(newAccuracy - oldAccuracy) > 10) {
-                liveAccuracy.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    liveAccuracy.style.transform = 'scale(1)';
-                }, 300);
-            }
-        }
-        
-        // Update user's overall stats
-        this.user.accuracy = sessionAccuracy;
-        this.user.correctAnswers = correctAnswers;
-        this.user.totalQuestions = totalAnswered;
-        
-        // Update rank using qualified system
-        this.updateUserRank();
-        
-        // Update ranking progress display
-        this.updateRankingProgress();
-        
-        // Update live rank display
-        this.updateLiveRankDisplay();
-        
-        // Update all other rank displays (header, profile)
-        this.updateHeader();
-        this.updateProfile();
-        
-        // Save user data
-        this.saveUserData();
-        
-        // Update Firebase if configured
-        if (this.firebase && this.firebase.isConfigured) {
-            this.updateUserInFirebase();
-        }
-    },
+    // script.js
+updateLiveStats() {
+    // This now calculates the rolling accuracy instead of session accuracy
+    const newAccuracy = this.calculateRollingAccuracy();
+
+    const liveAccuracy = document.getElementById('liveAccuracy');
+    if (liveAccuracy) {
+        const oldAccuracy = parseFloat(liveAccuracy.textContent) || 0;
+
+        // Show accuracy change animation
+        this.showAccuracyChange(oldAccuracy, newAccuracy);
+
+        // Update the display with animation
+        liveAccuracy.style.transition = 'all 0.5s ease';
+        liveAccuracy.textContent = `${newAccuracy.toFixed(1)}%`;
+    }
+
+    // Update user's overall stats (this is for local use, not what's displayed)
+    this.user.accuracy = newAccuracy;
+    this.user.rank = this.getQualifiedRank();
+
+    // Update all UI elements
+    this.updateRankingProgress();
+    this.updateLiveRankDisplay();
+    this.updateHeader();
+    this.updateProfile();
+    this.saveUserData();
+
+    // Update Firebase if configured
+    if (this.firebase && this.firebase.isConfigured) {
+        this.updateUserInFirebase();
+    }
+},
     
     updateRankingProgress() {
         const rankingProgress = document.getElementById('rankingProgress');
@@ -379,28 +359,31 @@ async updateUserInFirebase() {
         }
     },
 
-    async updateLeaderboardInFirebase(userId) {
-        if (!this.firebase || !this.firebase.isConfigured || !this.firebase.db) {
-            return;
-        }
-        
-        try {
-            const leaderboardRef = this.firebase.db.collection('leaderboard').doc(userId);
-            
-            await leaderboardRef.set({
-                userId: userId,
-                name: this.user.name, 
-                rank: this.user.rank,
-                accuracy: this.user.accuracy,
-                totalQuestions: this.user.totalQuestions,
-                lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-            }, { merge: true });
-            
-            console.log('Leaderboard updated in Firebase');
-        } catch (error) {
-            console.error('Error updating leaderboard in Firebase:', error);
-        }
-    },
+    // script.js
+async updateLeaderboardInFirebase() {
+    if (!this.firebase || !this.firebase.isConfigured || !this.firebase.db || !this.user.id) {
+        return;
+    }
+
+    try {
+        const userId = this.user.id;
+        const leaderboardRef = this.firebase.db.collection('leaderboard').doc(userId);
+
+        await leaderboardRef.set({
+            userId: userId,
+            name: this.user.name,
+            rank: this.user.rank,
+            // Change this line
+            accuracy: this.calculateRollingAccuracy(), // Use rolling accuracy
+            totalQuestions: this.user.questionHistory.length, // Use total history
+            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
+        console.log('Leaderboard updated in Firebase');
+    } catch (error) {
+        console.error('Error updating leaderboard in Firebase:', error);
+    }
+},
 
     // script.js (inside the app object)
 async loadLeaderboardFromFirebase() {
