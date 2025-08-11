@@ -1195,7 +1195,7 @@ getRankEmoji(rank) {
         this.user.sessionQuestions = 0;
         
         // Show integrated results
-        this.();
+        this.showQuizResults();
         this.showNotification('Quiz completed! Check your results.', 'success');
     },
     
