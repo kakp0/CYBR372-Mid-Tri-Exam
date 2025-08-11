@@ -1471,6 +1471,19 @@ refreshLeaderboard() {
             }, 300);
         }, 3000);
     },
+    // Add this function inside your app object
+updateFirebaseStatus(isConnected) {
+    const statusIndicator = document.querySelector('.status-indicator');
+    const statusText = document.querySelector('.firebase-status span');
+    
+    if (statusIndicator) {
+        statusIndicator.className = `status-indicator ${isConnected ? 'online' : 'offline'}`;
+    }
+    
+    if (statusText) {
+        statusText.textContent = `Firebase: ${isConnected ? 'Connected' : 'Not Configured'}`;
+    }
+},
     
     // =============================================
     // EVENT BINDING
