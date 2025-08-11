@@ -689,9 +689,9 @@ calculateRank(accuracy) {
     getRankColor(rank) {
         const colors = {
             'SSL': '#ffffff',
-            'Grand Champion III': '#f50246',
-            'Grand Champion II': '#f50246',
-            'Grand Champion I': '#f50246',
+            'Grand Champion III': '#ff0808',
+            'Grand Champion II': '#ff0808',
+            'Grand Champion I': '#ff0808',
             'Champion III': '#9361dc',
             'Champion II': '#9361dc',
             'Champion I': '#9361dc',
@@ -723,7 +723,7 @@ getRankGlow(rank) {
         case 'Grand Champion I':
         case 'Grand Champion II':
         case 'Grand Champion III':
-            return '0 0 15px #f50246, 0 0 30px #f50246';
+            return '0 0 15px #ff0808, 0 0 30px #ff0808';
         default:
             return 'none';
     }
