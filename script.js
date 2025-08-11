@@ -684,9 +684,9 @@ calculateRank(accuracy) {
     getRankColor(rank) {
         const colors = {
             'SSL': '#ffffff',
-            'Grand Champion III': '#9361dc',
-            'Grand Champion II': '#9361dc',
-            'Grand Champion I': '#9361dc',
+            'Grand Champion III': '#f50246',
+            'Grand Champion II': '#f50246',
+            'Grand Champion I': '#f50246',
             'Champion III': '#9361dc',
             'Champion II': '#9361dc',
             'Champion I': '#9361dc',
