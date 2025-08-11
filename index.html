@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBR372 Mid Trimester Practice Test</title>
+    <meta name="description" content="CYBR372 Mid Tri Exam Practice">
+<link rel="stylesheet" href="style.css?v=16882623739">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>CYBR372</h1>
+                    <p>Mid Tri Practice Test</p>
+                </div>
+                <div class="user-rank">
+                    <div class="rank-badge">
+                        <span class="rank-icon" id="headerRankIcon">U</span>
+                        <span class="rank-text" id="headerRankText">Player</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="app-nav">
+            <div class="nav-container">
+                <button class="nav-btn active" data-section="profile" onclick="app.showSection('profile')">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">Profile</span>
+                </button>
+                <button class="nav-btn" data-section="quiz" onclick="app.showSection('quiz')">
+                    <span class="nav-icon">❓</span>
+                    <span class="nav-text">Quiz</span>
+                </button>
+                <button class="nav-btn" data-section="leaderboard" onclick="app.showSection('leaderboard')">
+                    <span class="nav-icon">🏆</span>
+                    <span class="nav-text">Leaderboard</span>
+                </button>
+                <button class="nav-btn" data-section="settings" onclick="app.showSection('settings')">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Settings</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section active">
+                <div class="section-container">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <h2>Player Profile</h2>
+                            <div class="profile-avatar">
+                                <div class="avatar-circle" id="profileAvatar">
+                                    <span class="avatar-text" id="avatarText">🎯</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-info">
+                            <div class="info-row">
+                                <label class="info-label">Player Name</label>
+                                <input type="text" id="playerNameInput" class="info-input" placeholder="Enter your name" maxlength="20">
+                            </div>
+                            
+                            <div class="info-row">
+                                <label class="info-label">Current Rank</label>
+                                <div class="rank-display" id="profileRankDisplay">
+                                    <span class="rank-name" id="profileRankName">Unranked</span>
+                                    <div class="rank-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="rankProgressFill" style="width: 0%"></div>
+                                        </div>
+                                        <span class="progress-text" id="rankProgressText">0.0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-value" id="totalQuestionsStat">0</div>
+                                    <div class="stat-label">Questions</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="correctAnswersStat">0</div>
+                                    <div class="stat-label">Correct</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="accuracyStat">0%</div>
+                                    <div class="stat-label">Accuracy</div>
+                                </div>
+                            </div>
+                            
+                            <button class="save-profile-btn" id="saveProfileBtn" onclick="app.saveProfile()">
+                                Save Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Section -->
+            <section id="quiz-section" class="content-section">
+                <div class="section-container">
+                    <div class="quiz-card">
+                        <!-- Real-time Stats Bar -->
+                        <div class="quiz-stats-bar">
+                            <div class="stat-item">
+                                <div class="stat-label">Accuracy</div>
+                                <div class="stat-value-container">
+                                    <span class="stat-value" id="liveAccuracy">0%</span>
+                                    <div class="accuracy-change" id="accuracyChange"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Current Rank</div>
+                                <div class="rank-display-live" id="liveRankDisplay">
+                                    <span class="rank-icon" id="liveRankIcon">U</span>
+                                    <span class="rank-name" id="liveRankName">Unranked</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Progress</div>
+                                <div class="progress-info">
+                                    <div class="progress-text" id="quizProgressText">Question 1 of 10</div>
+                                    <div class="ranking-progress" id="rankingProgress" style="display: none;">
+                                        <div class="ranking-progress-text" id="rankingProgressText">0/50 for ranking</div>
+                                        <div class="ranking-progress-bar">
+                                            <div class="ranking-progress-fill" id="rankingProgressFill" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-header">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="quizProgressBar" style="width: 10%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-content">
+                            <div class="question-container">
+                                <div class="question-number" id="questionNumber">Q1</div>
+                                <div class="question-text" id="questionText">
+                                    Complete your profile first to start the quiz!
+                                </div>
+                            </div>
+                            
+                            <div class="answers-container" id="answersContainer">
+                                <!-- Answers will be generated by JavaScript -->
+                            </div>
+                            
+                            <div class="feedback-container" id="feedbackContainer">
+                                <div class="feedback-message" id="feedbackMessage"></div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Completion Results (Hidden until complete) -->
+                        <div class="quiz-results" id="quizResults" style="display: none;">
+                            <div class="results-header">
+                                <h2>Quiz Complete!</h2>
+                                <div class="final-rank" id="finalRank">
+                                    <span class="rank-icon" id="finalRankIcon">U</span>
+                                    <span class="rank-name" id="finalRankName">Unranked</span>
+                                </div>
+                            </div>
+                            
+                            <div class="final-stats">
+                                <div class="final-stat">
+                                    <div class="stat-value" id="finalCorrect">0/10</div>
+                                    <div class="stat-label">Correct Answers</div>
+                                </div>
+                                <div class="final-stat">
+                                    <div class="stat-value" id="finalAccuracy">0%</div>
+                                    <div class="stat-label">Final Accuracy</div>
+                                </div>
+                                <div class="final-stat">
+                                    <div class="stat-value" id="finalPerformance">Keep Going!</div>
+                                    <div class="stat-label">Performance</div>
+                                </div>
+                            </div>
+                            
+                            <div class="quiz-actions">
+                                <button class="action-btn" onclick="app.restartQuiz()">Take Quiz Again</button>
+                                <button class="action-btn secondary" onclick="app.showSection('leaderboard')">View Leaderboard</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+  
+
+            <!-- Leaderboard Section -->
+            <section id="leaderboard-section" class="content-section">
+                <div class="section-container">
+                    <div class="leaderboard-card">
+                        <div class="leaderboard-header">
+                            <h2>Global Leaderboard</h2>
+                            <button class="refresh-btn" onclick="app.refreshLeaderboard()">🔄 Refresh</button>
+                        </div>
+                        
+                        <div class="leaderboard-list" id="leaderboardList">
+                            <!-- Leaderboard items will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section">
+                <div class="section-container">
+                    <div class="settings-card">
+                        <div class="settings-header">
+                            <h2>Settings</h2>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h3>Quiz Preferences</h3>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">Shuffle Answers</div>
+                                    <div class="setting-desc">Randomize answer order each question</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="shuffleToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">Show Feedback</div>
+                                    <div class="setting-desc">Display correct/incorrect immediately</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="feedbackToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h3>Data Management</h3>
+                            <div class="data-actions">
+                                <button class="action-btn secondary" onclick="app.exportData()">Export Data</button>
+                                <button class="action-btn danger" onclick="app.resetProgress()">Reset Progress</button>
+                            </div>
+                        </div>
+                        
+                        <div class="firebase-info">
+                            <h3>Cloud Features</h3>
+                            <div class="firebase-status">
+                                <div class="status-indicator offline"></div>
+                                <span>Firebase: Not Configured</span>
+                            </div>
+                            <div class="firebase-guide">
+                                <p>Configure Firebase to enable cloud synchronization and global leaderboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Notification Container -->
+        <div class="notification-container" id="notificationContainer"></div>
+    </div>
+
+    <!-- Scripts -->
+<script src="script.js?v=16882623739"></script>
+    
+    <!-- Firebase Integration (Optional) -->
+    <!-- Uncomment and configure when ready to use Firebase -->
+   
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="gradgold_3" cx="50%" cy="30%">
+            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.6" />
+        </radialGradient>
+    </defs>
+    <circle cx="64" cy="64" r="58" fill="url(#gradgold_3)" stroke="#ffffff" stroke-width="3"/>
+    <text x="64" y="72" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#ffffff">G3</text>
+</svg>
