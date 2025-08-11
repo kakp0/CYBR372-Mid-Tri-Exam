@@ -249,33 +249,46 @@ const app = {
     // FIREBASE INTEGRATION
     // =============================================
     
-    initializeFirebase() {
-        // Check if Firebase is available and configured
-        if (typeof firebase === 'undefined') {
-            console.warn('Firebase not loaded. Please uncomment Firebase scripts in index.html');
-            this.firebase.isConfigured = false;
-            return;
-        }
-        
-        try {
-            // Initialize Firebase
-            firebase.initializeApp(this.firebase.config);
-            
-            // Initialize Firestore only (no auth needed)
-            this.firebase.db = firebase.firestore();
-            
-            console.log('Firebase initialized successfully');
-            this.firebase.isConfigured = true;
-            
-            // Get or create user ID and load user data
-            const userId = this.getUserId();
-            this.loadUserDataFromFirebase(userId);
-            
-        } catch (error) {
-            console.error('Firebase initialization failed:', error);
-            this.firebase.isConfigured = false;
-        }
-    },
+    // script.js (inside the app object)
+
+initializeFirebase() {
+    if (typeof firebase === 'undefined' || !this.firebase.config.apiKey.startsWith('AIza')) {
+        console.warn('Firebase not configured.');
+        this.firebase.isConfigured = false;
+        // Update UI to show Firebase is offline
+        this.updateFirebaseStatus(false); 
+        return;
+    }
+
+    try {
+        firebase.initializeApp(this.firebase.config);
+        this.firebase.db = firebase.firestore();
+        this.firebase.auth = firebase.auth(); // Make sure auth is initialized
+        this.firebase.isConfigured = true;
+        this.updateFirebaseStatus(true);
+        console.log('Firebase initialized.');
+
+        // ==> ADD THIS: Sign in the user <==
+        this.firebase.auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in anonymously.
+                console.log('User signed in:', user.uid);
+                this.user.id = user.uid; // Store the Firebase UID
+                this.loadUserDataFromFirebase(user.uid);
+            } else {
+                // User is signed out. Sign them in.
+                this.firebase.auth.signInAnonymously().catch(error => {
+                    console.error('Anonymous sign-in failed:', error);
+                });
+            }
+        });
+
+    } catch (error) {
+        console.error('Firebase initialization failed:', error);
+        this.firebase.isConfigured = false;
+        this.updateFirebaseStatus(false);
+    }
+},
 
     async createUserDocument(userId) {
         if (!this.firebase || !this.firebase.db) {
