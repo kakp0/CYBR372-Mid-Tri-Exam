@@ -409,6 +409,7 @@ async loadLeaderboardFromFirebase() {
 },
 
     // script.js
+// script.js
 displayLeaderboard(leaderboardData) {
     const leaderboardList = document.getElementById('leaderboardList');
     if (!leaderboardList) return;
@@ -442,6 +443,7 @@ displayLeaderboard(leaderboardData) {
                 <div class="leaderboard-score">
                     <span style="color: ${rankColor}; text-shadow: ${glowEffect};">${player.rank}</span>
                     <span class="leaderboard-accuracy">${player.accuracy.toFixed(1)}%</span>
+                    <span class="leaderboard-total-questions">${player.totalQuestions} Qs</span>
                 </div>
             </div>
         `;
