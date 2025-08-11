@@ -12,6 +12,10 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - name: Cache Busting ♻️
+        run: |
+          sed -i "s|?v=CACHE_BUSTER|?v=${{ github.run_id }}|g" index.html
+
       - name: Find and Replace Secrets 🕵️
         run: |
           sed -i "s|process.env.NEXT_PUBLIC_FIREBASE_API_KEY|'${{ secrets.FIREBASE_API_KEY }}'|g" script.js
