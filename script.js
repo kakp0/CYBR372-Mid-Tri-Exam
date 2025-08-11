@@ -445,7 +445,7 @@ displayLeaderboard(leaderboardData) {
                 <div class="leaderboard-score">
                     <span style="color: ${rankColor}; text-shadow: ${glowEffect};">${player.rank}</span>
                     <span class="leaderboard-accuracy">${player.accuracy.toFixed(1)}%</span>
-                    <span class="leaderboard-total-questions">${player.totalQuestions} Total Questions</span>
+                    <span class="leaderboard-total-questions">${player.totalQuestions} Total Completed Questions</span>
                 </div>
             </div>
         `;
