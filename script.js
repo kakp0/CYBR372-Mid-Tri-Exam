@@ -350,14 +350,14 @@ initializeFirebase() {
         }
     },
 
-    async updateUserInFirebase() {
-        if (!this.firebase || !this.firebase.isConfigured || !this.firebase.db) {
-            return;
-        }
-        
-        try {
-            const userId = this.getUserId();
-            const userRef = this.firebase.db.collection('users').doc(userId);
+async updateUserInFirebase() {
+    if (!this.firebase || !this.firebase.isConfigured || !this.firebase.db || !this.user.id) {
+        return; // Also check if user.id exists
+    }
+
+    try {
+        const userId = this.user.id; // Correct: Use the Firebase Auth ID
+        const userRef = this.firebase.db.collection('users').doc(userId);
             
             await userRef.set({
                 userId: userId,
