@@ -1325,26 +1325,7 @@ const app = {
     // =============================================
     
     renderLeaderboard() {
-        const leaderboardList = document.getElementById('leaderboardList');
-        if (!leaderboardList) return;
-        
-        const leaderboard = this.getLocalLeaderboard();
-        
-        leaderboardList.innerHTML = leaderboard.map((user, index) => {
-            const rankClass = index < 3 ? ['gold', 'silver', 'bronze'][index] : '';
-            return `
-                <div class="leaderboard-item">
-                    <div class="leaderboard-rank ${rankClass}">${index + 1}</div>
-                    <div class="leaderboard-info">
-                        <div class="leaderboard-name">${user.name}</div>
-                        <div class="leaderboard-score">
-                            <span style="color: ${this.getRankColor(user.rank)}">${user.rank}</span>
-                            <span class="leaderboard-accuracy">${user.accuracy.toFixed(1)}%</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
+    this.loadLeaderboardFromFirebase();
     },
     
     getLocalLeaderboard() {
