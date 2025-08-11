@@ -134,6 +134,8 @@ updateLiveStats() {
     if (this.firebase && this.firebase.isConfigured) {
         this.updateUserInFirebase();
     }
+    this.updateRankBasedTheme(); 
+
 },
     
     updateRankingProgress() {
@@ -465,6 +467,7 @@ displayLeaderboard(leaderboardData) {
         this.loadUserData();
         this.loadQuestions();
         this.bindEvents();
+
         
         // Initialize Firebase if configured
       
@@ -472,6 +475,8 @@ displayLeaderboard(leaderboardData) {
         
         
         this.updateUI();
+        this.updateRankBasedTheme();
+
         this.showSection('profile');
         console.log('Application initialized successfully');
     },
@@ -1476,6 +1481,13 @@ updateFirebaseStatus(isConnected) {
     if (statusText) {
         statusText.textContent = `Firebase: ${isConnected ? 'Connected' : 'Not Configured'}`;
     }
+},
+
+    // script.js
+updateRankBasedTheme() {
+    const rank = this.getQualifiedRank();
+    const color = this.getRankColor(rank);
+    document.documentElement.style.setProperty('--rank-color-base', color);
 },
     
     // =============================================
