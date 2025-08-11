@@ -611,29 +611,32 @@ displayLeaderboard(leaderboardData) {
     // RANK CALCULATION
     // =============================================
     
-    calculateRank(accuracy) {
-        if (accuracy >= 95) return 'SSL';
-        if (accuracy >= 90) return 'Grand Champion';
-        if (accuracy >= 85) return 'Champion III';
-        if (accuracy >= 80) return 'Champion II';
-        if (accuracy >= 75) return 'Champion I';
-        if (accuracy >= 70) return 'Diamond III';
-        if (accuracy >= 65) return 'Diamond II';
-        if (accuracy >= 60) return 'Diamond I';
-        if (accuracy >= 55) return 'Platinum III';
-        if (accuracy >= 50) return 'Platinum II';
-        if (accuracy >= 45) return 'Platinum I';
-        if (accuracy >= 40) return 'Gold III';
-        if (accuracy >= 35) return 'Gold II';
-        if (accuracy >= 30) return 'Gold I';
-        if (accuracy >= 25) return 'Silver III';
-        if (accuracy >= 20) return 'Silver II';
-        if (accuracy >= 15) return 'Silver I';
-        if (accuracy >= 10) return 'Bronze III';
-        if (accuracy >= 5) return 'Bronze II';
-        if (accuracy >= 0) return 'Bronze I';
-        return 'Unranked';
-    },
+// script.js
+calculateRank(accuracy) {
+    if (accuracy >= 95.45) return 'SSL';
+    if (accuracy >= 90.91) return 'Grand Champion 3';
+    if (accuracy >= 86.36) return 'Grand Champion 2';
+    if (accuracy >= 81.82) return 'Grand Champion 1';
+    if (accuracy >= 77.27) return 'Champion III';
+    if (accuracy >= 72.73) return 'Champion II';
+    if (accuracy >= 68.18) return 'Champion I';
+    if (accuracy >= 63.64) return 'Diamond III';
+    if (accuracy >= 59.09) return 'Diamond II';
+    if (accuracy >= 54.55) return 'Diamond I';
+    if (accuracy >= 50.00) return 'Platinum III';
+    if (accuracy >= 45.45) return 'Platinum II';
+    if (accuracy >= 40.91) return 'Platinum I';
+    if (accuracy >= 36.36) return 'Gold III';
+    if (accuracy >= 31.82) return 'Gold II';
+    if (accuracy >= 27.27) return 'Gold I';
+    if (accuracy >= 22.73) return 'Silver III';
+    if (accuracy >= 18.18) return 'Silver II';
+    if (accuracy >= 13.64) return 'Silver I';
+    if (accuracy >= 9.09) return 'Bronze III';
+    if (accuracy >= 4.55) return 'Bronze II';
+    if (accuracy >= 0) return 'Bronze I';
+    return 'Unranked';
+},
     
     calculateRollingAccuracy() {
         const history = this.user.questionHistory;
@@ -708,66 +711,73 @@ getRankGlow(rank) {
     switch (rank) {
         case 'SSL':
             return '0 0 20px #ffffff, 0 0 40px #ffffff';
-        case 'Grand Champion':
+        case 'Grand Champion 1':
+        case 'Grand Champion 2':
+        case 'Grand Champion 3':
             return '0 0 15px #f50246, 0 0 30px #f50246';
         default:
             return 'none';
     }
 },
     
-    getRankIcon(rank) {
-        const icons = {
-            'SSL': 'ssl',
-            'Grand Champion': 'grand_champion',
-            'Champion III': 'champion_3',
-            'Champion II': 'champion_2',
-            'Champion I': 'champion_1',
-            'Diamond III': 'diamond_3',
-            'Diamond II': 'diamond_2',
-            'Diamond I': 'diamond_1',
-            'Platinum III': 'platinum_3',
-            'Platinum II': 'platinum_2',
-            'Platinum I': 'platinum_1',
-            'Gold III': 'gold_3',
-            'Gold II': 'gold_2',
-            'Gold I': 'gold_1',
-            'Silver III': 'silver_3',
-            'Silver II': 'silver_2',
-            'Silver I': 'silver_1',
-            'Bronze III': 'bronze_3',
-            'Bronze II': 'bronze_2',
-            'Bronze I': 'bronze_1',
-            'Unranked': 'unranked'
-        };
-        return icons[rank] || 'unranked';
-    },
+    // script.js
+getRankIcon(rank) {
+    const icons = {
+        'SSL': 'ssl',
+        'Grand Champion 1': 'grand_champion_3',
+        'Grand Champion 2': 'grand_champion_2',
+        'Grand Champion 3': 'grand_champion_1',
+        'Champion III': 'champion_3',
+        'Champion II': 'champion_2',
+        'Champion I': 'champion_1',
+        'Diamond III': 'diamond_3',
+        'Diamond II': 'diamond_2',
+        'Diamond I': 'diamond_1',
+        'Platinum III': 'platinum_3',
+        'Platinum II': 'platinum_2',
+        'Platinum I': 'platinum_1',
+        'Gold III': 'gold_3',
+        'Gold II': 'gold_2',
+        'Gold I': 'gold_1',
+        'Silver III': 'silver_3',
+        'Silver II': 'silver_2',
+        'Silver I': 'silver_1',
+        'Bronze III': 'bronze_3',
+        'Bronze II': 'bronze_2',
+        'Bronze I': 'bronze_1',
+        'Unranked': 'unranked'
+    };
+    return icons[rank] || 'unranked';
+},
     
-    getRankEmoji(rank) {
-        const emojis = {
-            'SSL': '👑',
-            'Grand Champion': '🏆',
-            'Champion III': '🥇',
-            'Champion II': '🥈',
-            'Champion I': '🥉',
-            'Diamond III': '💎',
-            'Diamond II': '💎',
-            'Diamond I': '💎',
-            'Platinum III': '⭐',
-            'Platinum II': '⭐',
-            'Platinum I': '⭐',
-            'Gold III': '🥇',
-            'Gold II': '🥈',
-            'Gold I': '🥉',
-            'Silver III': '🥈',
-            'Silver II': '🥈',
-            'Silver I': '🥈',
-            'Bronze III': '🥉',
-            'Bronze II': '🥉',
-            'Bronze I': '🥉',
-            'Unranked': '🎯'
-        };
-        return emojis[rank] || '🎯';
-    },
+getRankEmoji(rank) {
+    const emojis = {
+        'SSL': '👑',
+        'Grand Champion 1': '🏆',
+        'Grand Champion 2': '🏆',
+        'Grand Champion 3': '🏆',
+        'Champion III': '🥇',
+        'Champion II': '🥈',
+        'Champion I': '🥉',
+        'Diamond III': '💎',
+        'Diamond II': '💎',
+        'Diamond I': '💎',
+        'Platinum III': '⭐',
+        'Platinum II': '⭐',
+        'Platinum I': '⭐',
+        'Gold III': '🥇',
+        'Gold II': '🥈',
+        'Gold I': '🥉',
+        'Silver III': '🥈',
+        'Silver II': '🥈',
+        'Silver I': '🥈',
+        'Bronze III': '🥉',
+        'Bronze II': '🥉',
+        'Bronze I': '🥉',
+        'Unranked': '🎯'
+    };
+    return emojis[rank] || '🎯';
+},
     
     updateUserRank() {
         // Use qualified rank system (50-question minimum, rolling average)
