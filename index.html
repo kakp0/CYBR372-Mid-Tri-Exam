@@ -26,26 +26,42 @@
         </header>
 
         <!-- Navigation -->
-        <nav class="app-nav">
-            <div class="nav-container">
-                <button class="nav-btn active" data-section="profile" onclick="app.showSection('profile')">
-                    <span class="nav-icon">👤</span>
-                    <span class="nav-text">Profile</span>
-                </button>
-                <button class="nav-btn" data-section="quiz" onclick="app.showSection('quiz')">
-                    <span class="nav-icon">❓</span>
-                    <span class="nav-text">Quiz</span>
-                </button>
-                <button class="nav-btn" data-section="leaderboard" onclick="app.showSection('leaderboard')">
-                    <span class="nav-icon">🏆</span>
-                    <span class="nav-text">Leaderboard</span>
-                </button>
-                <button class="nav-btn" data-section="settings" onclick="app.showSection('settings')">
-                    <span class="nav-icon">⚙️</span>
-                    <span class="nav-text">Settings</span>
-                </button>
-            </div>
-        </nav>
+<nav class="app-nav">
+    <div class="nav-container">
+        <button class="nav-btn active" data-section="profile" onclick="app.showSection('profile')">
+            <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </span>
+            <span class="nav-text">Profile</span>
+        </button>
+        <button class="nav-btn" data-section="quiz" onclick="app.showSection('quiz')">
+            <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                </svg>
+            </span>
+            <span class="nav-text">Quiz</span>
+        </button>
+        <button class="nav-btn" data-section="leaderboard" onclick="app.showSection('leaderboard')">
+            <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9 9 0 119 0zM16.5 18.75a9 9 0 00-9 0m9 0a9 9 0 01-9 0m9 0v-4.5A2.25 2.25 0 0014.25 12H9.75A2.25 2.25 0 007.5 14.25v4.5m9 0a9 9 0 00-9 0m9 0a9 9 0 01-9 0m9 0a9 9 0 00-9 0" />
+                </svg>
+            </span>
+            <span class="nav-text">Leaderboard</span>
+        </button>
+        <button class="nav-btn" data-section="settings" onclick="app.showSection('settings')">
+            <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.003 1.11-1.226a11.98 11.98 0 013.59 0c.55.223 1.02.684 1.11 1.226.09.542-.146 1.09-.575 1.488a11.983 11.983 0 01-4.59 1.755c-.22.03-.442.046-.662.057a11.983 11.983 0 01-4.59-1.755c-.43-.398-.665-.946-.575-1.488zM12 9.75a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z" />
+                </svg>
+            </span>
+            <span class="nav-text">Settings</span>
+        </button>
+    </div>
+</nav>
 
         <!-- Main Content -->
         <main class="app-main">
