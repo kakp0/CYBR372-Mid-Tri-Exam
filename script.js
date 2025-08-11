@@ -716,32 +716,17 @@ async loadLeaderboardFromFirebase() {
         return colors[rank] || '#666666';
     },
     
-    getRankGlow(rank) {
-        const glowEffects = {
-            'SSL': '0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff, 0 0 80px #ffffff',
-            'Grand Champion': '0 0 15px #f50246, 0 0 30px #f50246, 0 0 45px #f50246',
-            'Champion III': '0 0 12px #9361dc, 0 0 24px #9361dc, 0 0 36px #9361dc',
-            'Champion II': '0 0 12px #9361dc, 0 0 24px #9361dc, 0 0 36px #9361dc',
-            'Champion I': '0 0 12px #9361dc, 0 0 24px #9361dc, 0 0 36px #9361dc',
-            'Diamond III': '0 0 10px #0372ff, 0 0 20px #0372ff, 0 0 30px #0372ff',
-            'Diamond II': '0 0 10px #0372ff, 0 0 20px #0372ff, 0 0 30px #0372ff',
-            'Diamond I': '0 0 10px #0372ff, 0 0 20px #0372ff, 0 0 30px #0372ff',
-            'Platinum III': '0 0 8px #9ff8ff, 0 0 16px #9ff8ff, 0 0 24px #9ff8ff',
-            'Platinum II': '0 0 8px #9ff8ff, 0 0 16px #9ff8ff, 0 0 24px #9ff8ff',
-            'Platinum I': '0 0 8px #9ff8ff, 0 0 16px #9ff8ff, 0 0 24px #9ff8ff',
-            'Gold III': '0 0 6px #e6cc3b, 0 0 12px #e6cc3b, 0 0 18px #e6cc3b',
-            'Gold II': '0 0 6px #e6cc3b, 0 0 12px #e6cc3b, 0 0 18px #e6cc3b',
-            'Gold I': '0 0 6px #e6cc3b, 0 0 12px #e6cc3b, 0 0 18px #e6cc3b',
-            'Silver III': '0 0 4px #727272, 0 0 8px #727272, 0 0 12px #727272',
-            'Silver II': '0 0 4px #727272, 0 0 8px #727272, 0 0 12px #727272',
-            'Silver I': '0 0 4px #727272, 0 0 8px #727272, 0 0 12px #727272',
-            'Bronze III': 'none',
-            'Bronze II': 'none',
-            'Bronze I': 'none',
-            'Unranked': 'none'
-        };
-        return glowEffects[rank] || 'none';
-    },
+// script.js
+getRankGlow(rank) {
+    switch (rank) {
+        case 'SSL':
+            return '0 0 20px #ffffff, 0 0 40px #ffffff';
+        case 'Grand Champion':
+            return '0 0 15px #f50246, 0 0 30px #f50246';
+        default:
+            return 'none';
+    }
+},
     
     getRankIcon(rank) {
         const icons = {
