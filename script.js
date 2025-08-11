@@ -48,8 +48,53 @@ const app = {
             appId: "YOUR_APP_ID"
         },
         db: null,
-        auth: null,
         isConfigured: false
+    },
+    
+    // =============================================
+    // UTILITY FUNCTIONS
+    // =============================================
+    
+    generateUniqueId() {
+        // Generate a cryptographically secure random ID
+        const array = new Uint8Array(16);
+        crypto.getRandomValues(array);
+        
+        // Convert to hex string and add timestamp for uniqueness
+        const hex = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+        const timestamp = Date.now().toString(36);
+        
+        return `${timestamp}-${hex}`;
+    },
+    
+    getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    },
+    
+    setCookie(name, value, days = 365) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = `expires=${date.toUTCString()}`;
+        document.cookie = `${name}=${value};${expires};path=/;SameSite=Strict`;
+    },
+    
+    getUserId() {
+        // Try to get existing user ID from cookie
+        let userId = this.getCookie('cybr372_user_id');
+        
+        if (!userId) {
+            // Generate new ID if none exists
+            userId = this.generateUniqueId();
+            this.setCookie('cybr372_user_id', userId);
+            console.log('Generated new user ID:', userId);
+        } else {
+            console.log('Using existing user ID:', userId);
+        }
+        
+        return userId;
     },
     
     // =============================================
@@ -216,42 +261,19 @@ const app = {
             // Initialize Firebase
             firebase.initializeApp(this.firebase.config);
             
-            // Initialize services
+            // Initialize Firestore only (no auth needed)
             this.firebase.db = firebase.firestore();
-            this.firebase.auth = firebase.auth();
             
             console.log('Firebase initialized successfully');
             this.firebase.isConfigured = true;
             
-            // Set up authentication state listener
-            this.firebase.auth.onAuthStateChanged((user) => {
-                if (user) {
-                    console.log('User authenticated:', user.uid);
-                    this.loadUserDataFromFirebase(user.uid);
-                } else {
-                    console.log('User not authenticated');
-                    this.anonymousSignIn();
-                }
-            });
+            // Get or create user ID and load user data
+            const userId = this.getUserId();
+            this.loadUserDataFromFirebase(userId);
             
         } catch (error) {
             console.error('Firebase initialization failed:', error);
             this.firebase.isConfigured = false;
-        }
-    },
-
-    async anonymousSignIn() {
-        if (!this.firebase || !this.firebase.auth) {
-            console.warn('Firebase auth not available');
-            return;
-        }
-        
-        try {
-            const result = await this.firebase.auth.signInAnonymously();
-            console.log('Anonymous sign-in successful:', result.user.uid);
-            this.createUserDocument(result.user.uid);
-        } catch (error) {
-            console.error('Anonymous sign-in failed:', error);
         }
     },
 
@@ -278,7 +300,7 @@ const app = {
                     lastActive: firebase.firestore.FieldValue.serverTimestamp(),
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                console.log('User document created');
+                console.log('User document created for ID:', userId);
             }
         } catch (error) {
             console.error('Error creating user document:', error);
@@ -315,15 +337,16 @@ const app = {
     },
 
     async updateUserInFirebase() {
-        if (!this.firebase || !this.firebase.isConfigured || !this.firebase.auth || !this.firebase.auth.currentUser) {
+        if (!this.firebase || !this.firebase.isConfigured || !this.firebase.db) {
             return;
         }
         
         try {
-            const userId = this.firebase.auth.currentUser.uid;
+            const userId = this.getUserId();
             const userRef = this.firebase.db.collection('users').doc(userId);
             
-            await userRef.update({
+            await userRef.set({
+                userId: userId,
                 name: this.user.name,
                 rank: this.user.rank,
                 accuracy: this.user.accuracy,
@@ -331,12 +354,12 @@ const app = {
                 correctAnswers: this.user.correctAnswers,
                 questionHistory: this.user.questionHistory,
                 lastActive: firebase.firestore.FieldValue.serverTimestamp()
-            });
+            }, { merge: true }); // Use merge to update existing document
             
             // Update leaderboard
             await this.updateLeaderboardInFirebase(userId);
             
-            console.log('User data updated in Firebase');
+            console.log('User data updated in Firebase for ID:', userId);
         } catch (error) {
             console.error('Error updating user data in Firebase:', error);
         }
