@@ -7,22 +7,22 @@
     box-sizing: border-box;
 }
 
+/* style.css */
 :root {
     --primary-bg: #0a0a0a;
     --secondary-bg: #1a1a1a;
     --card-bg: #1a1a1a;
-    --accent-primary: #ff6b35;
-    --accent-secondary: #f7931e;
-    --accent-tertiary: #ffd23f;
+    
+    /* New dynamic theme variables */
+    --rank-color-base: #ff6b35; /* Fallback to orange */
+    --dynamic-gradient: linear-gradient(135deg, var(--rank-color-base) 0%, color-mix(in srgb, var(--rank-color-base) 70%, black) 100%);
+
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
     --border-color: rgba(255, 255, 255, 0.1);
     --success: #4ade80;
     --error: #ef4444;
     --warning: #f59e0b;
-    --gradient-1: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-    --gradient-2: linear-gradient(135deg, #f7931e 0%, #ffd23f 100%);
-    --gradient-3: linear-gradient(135deg, #ff6b35 0%, #ff8c42 50%, #ffd23f 100%);
 }
 
 body {
@@ -90,7 +90,7 @@ body::before {
 .logo h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -176,7 +176,7 @@ body::before {
 }
 
 .nav-btn.active {
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     color: var(--text-primary);
     border-color: transparent;
 }
@@ -322,7 +322,7 @@ body::before {
 
 .progress-fill {
     height: 100%;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     transition: width 0.3s ease;
 }
 
@@ -350,7 +350,7 @@ body::before {
 .stat-value {
     font-size: 1.5rem;
     font-weight: 700;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -364,7 +364,7 @@ body::before {
 
 .save-profile-btn {
     padding: 1rem 2rem;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     border: none;
     border-radius: 12px;
     color: var(--text-primary);
@@ -529,7 +529,7 @@ body::before {
     left: 0;
     right: 0;
     height: 3px;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -542,7 +542,7 @@ body::before {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -562,7 +562,7 @@ body::before {
     right: 0;
     bottom: 0;
     border-radius: 50%;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     animation: pulseNumber 2s ease-in-out infinite;
     z-index: -1;
 }
@@ -729,7 +729,7 @@ body::before {
     font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -768,7 +768,7 @@ body::before {
 .final-stat .stat-value {
     font-size: 2rem;
     font-weight: 700;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -790,7 +790,7 @@ body::before {
 
 .action-btn {
     padding: 1rem 2rem;
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     border: none;
     border-radius: 12px;
     color: var(--text-primary);
@@ -1028,7 +1028,7 @@ body::before {
 }
 
 input:checked + .toggle-slider {
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
 }
 
 input:checked + .toggle-slider:before {
@@ -1270,7 +1270,7 @@ input:checked + .toggle-slider:before {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--gradient-1);
+    background: var(--dynamic-gradient);
     border-radius: 3px;
 }
 
