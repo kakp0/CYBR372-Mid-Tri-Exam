@@ -425,43 +425,47 @@ async loadLeaderboardFromFirebase() {
     }
 },
 
-    displayLeaderboard(leaderboardData) {
-        const leaderboardList = document.getElementById('leaderboardList');
-        if (!leaderboardList) return;
-        
-        leaderboardList.innerHTML = '';
-        
-        if (leaderboardData.length === 0) {
-            leaderboardList.innerHTML = '<div class="no-data">No leaderboard data available</div>';
-            return;
-        }
-        
-        leaderboardData.forEach((player, index) => {
-            const playerElement = document.createElement('div');
-            playerElement.className = 'leaderboard-item';
-            
-            const rankColor = this.getRankColor(player.rank);
-            const glowEffect = this.getRankGlow(player.rank);
-            
-            playerElement.innerHTML = `
-                <div class="player-rank">${index + 1}</div>
-                <div class="player-info">
-                    <div class="player-name">${player.name}</div>
-                    <div class="player-stats">
-                        <span class="player-rank-badge" style="color: ${rankColor}; text-shadow: ${glowEffect};">${player.rank}</span>
-                        <span class="player-accuracy">${player.accuracy.toFixed(1)}%</span>
-                        <span class="player-questions">${player.totalQuestions} questions</span>
-                    </div>
+    // script.js
+displayLeaderboard(leaderboardData) {
+    const leaderboardList = document.getElementById('leaderboardList');
+    if (!leaderboardList) return;
+
+    leaderboardList.innerHTML = '';
+
+    if (leaderboardData.length === 0) {
+        leaderboardList.innerHTML = '<div class="no-data" style="text-align: center; padding: 2rem; color: var(--text-secondary);">No leaderboard data available. Complete a quiz to get on the board!</div>';
+        return;
+    }
+
+    leaderboardData.forEach((player, index) => {
+        const playerElement = document.createElement('div');
+        playerElement.className = 'leaderboard-item';
+
+        const rankIconFile = this.getRankIcon(player.rank);
+        const rankEmoji = this.getRankEmoji(player.rank);
+        const rankColor = this.getRankColor(player.rank);
+        const glowEffect = this.getRankGlow(player.rank);
+        const rankClass = index < 3 ? ['gold', 'silver', 'bronze'][index] : '';
+
+        playerElement.innerHTML = `
+            <div class="leaderboard-rank ${rankClass}">${index + 1}</div>
+            <div class="leaderboard-rank-icon" style="background-color: ${rankColor}; box-shadow: ${glowEffect};">
+                <img src="rank-icons/${rankIconFile}.png" alt="${player.rank}"
+                     onerror="this.onerror=null; this.src='rank-icons/${rankIconFile}.svg'; this.onerror=function(){this.style.display='none'; this.parentElement.querySelector('.emoji-fallback').style.display='flex';};">
+                <div class="emoji-fallback">${rankEmoji}</div>
+            </div>
+            <div class="leaderboard-info">
+                <div class="leaderboard-name">${player.name || 'Anonymous'}</div>
+                <div class="leaderboard-score">
+                    <span style="color: ${rankColor}; text-shadow: ${glowEffect};">${player.rank}</span>
+                    <span class="leaderboard-accuracy">${player.accuracy.toFixed(1)}%</span>
                 </div>
-                <div class="player-score">
-                    <div class="score-value">${player.accuracy.toFixed(1)}%</div>
-                    <div class="score-label">Accuracy</div>
-                </div>
-            `;
-            
-            leaderboardList.appendChild(playerElement);
-        });
-    },
+            </div>
+        `;
+
+        leaderboardList.appendChild(playerElement);
+    });
+},
 
     refreshLeaderboard() {
         if (this.firebase && this.firebase.isConfigured) {
