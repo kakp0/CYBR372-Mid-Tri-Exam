@@ -1357,10 +1357,16 @@ const app = {
             .slice(0, 10);
     },
     
-    refreshLeaderboard() {
-        this.renderLeaderboard();
+// script.js
+refreshLeaderboard() {
+    if (this.firebase && this.firebase.isConfigured) {
+        this.loadLeaderboardFromFirebase();
         this.showNotification('Leaderboard refreshed!', 'success');
-    },
+    } else {
+        this.showNotification('Firebase not configured. Using local data.', 'error');
+        // Optionally, you can fall back to the local leaderboard here if you want
+    }
+},
     
     // =============================================
     // SETTINGS MANAGEMENT
