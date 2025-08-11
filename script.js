@@ -388,6 +388,7 @@ initializeFirebase() {
             
             await leaderboardRef.set({
                 userId: userId,
+                name: this.user.name, 
                 rank: this.user.rank,
                 accuracy: this.user.accuracy,
                 totalQuestions: this.user.totalQuestions,
@@ -400,41 +401,28 @@ initializeFirebase() {
         }
     },
 
-    async loadLeaderboardFromFirebase() {
-        if (!this.firebase || !this.firebase.isConfigured || !this.firebase.db) {
-            return;
-        }
-        
-        try {
-            const leaderboardRef = this.firebase.db.collection('leaderboard')
-                .orderBy('accuracy', 'desc')
-                .orderBy('totalQuestions', 'desc')
-                .limit(50);
-            
-            const snapshot = await leaderboardRef.get();
-            const leaderboardData = [];
-            
-            for (const doc of snapshot.docs) {
-                const data = doc.data();
-                const userDoc = await this.firebase.db.collection('users').doc(doc.id).get();
-                const userData = userDoc.data();
-                
-                leaderboardData.push({
-                    userId: doc.id,
-                    name: userData.name || 'Anonymous',
-                    rank: data.rank,
-                    accuracy: data.accuracy,
-                    totalQuestions: data.totalQuestions,
-                    lastUpdated: data.lastUpdated
-                });
-            }
-            
-            this.displayLeaderboard(leaderboardData);
-            console.log('Leaderboard loaded from Firebase');
-        } catch (error) {
-            console.error('Error loading leaderboard from Firebase:', error);
-        }
-    },
+    // script.js (inside the app object)
+async loadLeaderboardFromFirebase() {
+    if (!this.firebase.isConfigured || !this.firebase.db) {
+        this.showNotification('Leaderboard is offline.', 'error');
+        return;
+    }
+
+    try {
+        const leaderboardRef = this.firebase.db.collection('leaderboard')
+            .orderBy('accuracy', 'desc')
+            .limit(50);
+
+        const snapshot = await leaderboardRef.get();
+        const leaderboardData = snapshot.docs.map(doc => doc.data());
+
+        this.displayLeaderboard(leaderboardData);
+        console.log('Leaderboard loaded from Firebase');
+    } catch (error) {
+        console.error('Error loading leaderboard from Firebase:', error);
+        this.showNotification('Could not load leaderboard.', 'error');
+    }
+},
 
     displayLeaderboard(leaderboardData) {
         const leaderboardList = document.getElementById('leaderboardList');
