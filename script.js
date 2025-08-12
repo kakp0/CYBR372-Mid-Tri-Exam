@@ -1020,7 +1020,7 @@ getRankEmoji(rank) {
 
         // Shuffle the main question bank and select 50 for the quiz round
         const shuffledBank = this.shuffleArray([...window.sampleQuestions]);
-        this.quiz.questions = shuffledBank.slice(0, 50);
+        this.quiz.questions = shuffledBank;
 
         if (this.quiz.questions.length < 50) {
             console.warn(`Warning: Only ${this.quiz.questions.length} questions available, less than the desired 50.`);
