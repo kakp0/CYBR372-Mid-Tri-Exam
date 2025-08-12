@@ -1018,14 +1018,8 @@ getRankEmoji(rank) {
             return;
         }
 
-        // Shuffle the main question bank and select 50 for the quiz round
-        const shuffledBank = this.shuffleArray([...window.sampleQuestions]);
-        this.quiz.questions = shuffledBank;
-
-        if (this.quiz.questions.length < 50) {
-            console.warn(`Warning: Only ${this.quiz.questions.length} questions available, less than the desired 50.`);
-            this.showNotification(`Warning: Quiz started with only ${this.quiz.questions.length} questions.`, 'warning');
-        }
+        // Shuffle the entire question bank to use all available questions
+        this.quiz.questions = this.shuffleArray([...window.sampleQuestions]);
         
         this.quiz.isActive = true;
         this.quiz.currentQuestion = 0;
