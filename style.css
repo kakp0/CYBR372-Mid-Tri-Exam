@@ -513,7 +513,7 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    height: calc(100% - 80px);
+    /* Removed fixed height to allow dynamic sizing based on content */
 }
 
 .question-container {
@@ -1292,8 +1292,8 @@ input:checked + .toggle-slider:before {
     }
     
     .nav-container {
-        justify-content: flex-start; /* Allow scrolling from the start */
-        overflow-x: scroll;
+        justify-content: center; /* Center buttons on mobile */
+        overflow-x: auto; /* Use auto to only show scrollbar if needed */
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none; /* Hide scrollbar for Firefox */
     }
