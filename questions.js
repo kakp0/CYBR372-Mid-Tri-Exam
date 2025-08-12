@@ -981,6 +981,946 @@ const sampleQuestions = [
             "A type of attack against OCSP."
         ],
         "correct": 0
+    },
+    {
+        "question": "In RSA key generation, why is it crucial that the primes p and q are kept secret?",
+        "answers": [
+            "Because if an attacker knows p and q, they can easily compute the modulus n.",
+            "Because knowing p and q allows an attacker to compute t = lcm(p-1, q-1) and then find the private key d.",
+            "Because p and q are used directly in the decryption process.",
+            "Because p and q determine the size of the public exponent e."
+        ],
+        "correct": 1
+    },
+    {
+        "question": "What is the primary advantage of Elliptic Curve Cryptography (ECC) over RSA?",
+        "answers": [
+            "ECC offers equivalent security with significantly smaller key sizes.",
+            "ECC is simpler to understand and implement than RSA.",
+            "ECC is resistant to attacks from quantum computers.",
+            "ECC can be used for both encryption and digital signatures, unlike RSA."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "In the context of a Diffie-Hellman key exchange, what does a man-in-the-middle attacker do?",
+        "answers": [
+            "The attacker passively listens to the exchange to deduce the shared secret.",
+            "The attacker intercepts the public keys and substitutes their own, establishing separate secret keys with each party.",
+            "The attacker floods the channel with noise to disrupt the key exchange.",
+            "The attacker tries to solve the discrete logarithm problem to find the private keys."
+        ],
+        "correct": 1
+    },
+    {
+        "question": "What is the 'cover time' of a piece of information?",
+        "answers": [
+            "The time it takes to encrypt the information.",
+            "The length of time for which the information must be kept secret.",
+            "The time it takes for an attacker to brute-force the key.",
+            "The time a message spends in transit."
+        ],
+        "correct": 1
+    },
+    {
+        "question": "Which property of a hash function is most important for protecting digitally signed documents from alteration?",
+        "answers": [
+            "Preimage resistance",
+            "Second preimage resistance",
+            "Collision resistance",
+            "The avalanche effect"
+        ],
+        "correct": 1
+    },
+    {
+        "question": "How does the Counter (CTR) mode turn a block cipher into a stream cipher?",
+        "answers": [
+            "By encrypting a counter and XORing the result with the plaintext, effectively generating a keystream.",
+            "By chaining the plaintext blocks together before encryption.",
+            "By using the plaintext as the key for the counter.",
+            "By feeding the output of the cipher back into the input."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the primary reason for using a standard padding scheme like RSA-OAEP instead of simple zero-padding?",
+        "answers": [
+            "To prevent attacks that exploit the mathematical structure of unpadded RSA, such as the small message attack.",
+            "To make the ciphertext larger and more difficult to transmit.",
+            "To ensure the message is always a prime number.",
+            "To add a digital signature to the encrypted message."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the relationship between non-repudiation and data origin authentication?",
+        "answers": [
+            "They are independent concepts.",
+            "Data origin authentication is a prerequisite for non-repudiation.",
+            "Non-repudiation is a prerequisite for data origin authentication.",
+            "They are the same security service."
+        ],
+        "correct": 1
+    },
+    {
+        "question": "In the HMAC construction, what is the purpose of using two different keys derived from the master key (ipad and opad)?",
+        "answers": [
+            "To provide a nested, more secure hash computation that is resistant to length extension attacks.",
+            "To allow for two different hash functions to be used.",
+            "To double the length of the output tag.",
+            "One key is for encryption and the other is for authentication."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'fault analysis' attack?",
+        "answers": [
+            "An attack where an attacker induces errors in a cryptographic device's computation to deduce secret information from the faulty outputs.",
+            "An analysis of the faults in a cryptographic algorithm's design.",
+            "An attack that exploits software bugs.",
+            "An attack where the attacker finds fault with the security of a system."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "Why is a large keyspace a necessary but not sufficient condition for a secure cryptosystem?",
+        "answers": [
+            "A large keyspace prevents brute-force attacks, but doesn't protect against analytical attacks that exploit structural weaknesses.",
+            "A large keyspace makes the cipher too slow to be practical.",
+            "A small keyspace is actually more secure because there are fewer keys to manage.",
+            "The size of the keyspace has no impact on the security of a cryptosystem."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "In the context of the Vigenère cipher, what is the 'Kasiski examination' used for?",
+        "answers": [
+            "To determine the length of the keyword by finding repeated sequences of letters in the ciphertext.",
+            "To perform frequency analysis on the ciphertext.",
+            "To find the keyword through a dictionary attack.",
+            "To encrypt the message using the Kasiski method."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the main difference in error propagation between CFB mode and OFB mode?",
+        "answers": [
+            "In CFB, a bit error in the ciphertext affects the decryption of the current block and the next, while in OFB, a bit error only affects the corresponding plaintext bit.",
+            "OFB has more significant error propagation than CFB.",
+            "CFB has no error propagation.",
+            "They have identical error propagation characteristics."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What does it mean for a problem to be solvable in 'polynomial time'?",
+        "answers": [
+            "The time required to solve the problem is bounded by a polynomial function of the input size, generally considered 'efficient' or 'easy'.",
+            "The problem involves solving polynomial equations.",
+            "The time required is very large and grows exponentially.",
+            "The problem can only be solved by a quantum computer."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "How does a digital signature scheme with message recovery differ from one with appendix?",
+        "answers": [
+            "In a scheme with message recovery, the original message can be recovered from the signature itself, whereas a scheme with appendix requires the original message to be sent alongside the signature.",
+            "Message recovery schemes are less secure.",
+            "Schemes with appendix are faster.",
+            "Message recovery is an outdated technique."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'trapdoor' in the RSA cryptosystem?",
+        "answers": [
+            "The knowledge of the prime factors p and q of the modulus n.",
+            "The public exponent e.",
+            "The padding scheme used.",
+            "A hidden weakness in the algorithm."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "Which security service is NOT typically provided by a Message Authentication Code (MAC)?",
+        "answers": [
+            "Data integrity",
+            "Data origin authentication",
+            "Non-repudiation",
+            "A MAC provides all of these."
+        ],
+        "correct": 2
+    },
+    {
+        "question": "What is the purpose of the 'AddRoundKey' step in the AES algorithm?",
+        "answers": [
+            "To combine the current state with a portion of the expanded key using a bitwise XOR operation.",
+            "To add a new key to the key schedule.",
+            "To increase the size of the state matrix.",
+            "To perform a modular addition."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'hybrid cryptosystem'?",
+        "answers": [
+            "A system that combines the efficiency of symmetric cryptography with the convenience of asymmetric cryptography for key exchange.",
+            "A system that uses both hardware and software for encryption.",
+            "A cryptosystem that can operate in multiple modes.",
+            "A system that combines a block cipher and a stream cipher."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "In the context of password-based key derivation functions (PBKDFs), what is the purpose of the 'iteration count'?",
+        "answers": [
+            "To make the key derivation process computationally expensive and slow down brute-force attacks.",
+            "To determine the length of the output key.",
+            "To count the number of times a password has been used.",
+            "To add randomness to the process."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the fundamental reason that a one-time pad offers perfect secrecy?",
+        "answers": [
+            "The key is random, the same length as the message, and never reused, making every possible plaintext equally likely given a ciphertext.",
+            "The XOR operation is mathematically unbreakable.",
+            "The key is generated by a true random number generator.",
+            "The key is exchanged securely before communication."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the role of a 'primitive root modulo p' in the Diffie-Hellman key exchange?",
+        "answers": [
+            "It is a number 'g' whose powers generate all the integers from 1 to p-1, ensuring a large space for the public keys.",
+            "It is the secret key.",
+            "It is the shared secret.",
+            "It is a large prime number."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'length extension attack' and which type of MAC construction is vulnerable to it?",
+        "answers": [
+            "An attack where an attacker can compute MAC(message || extension) from MAC(message) without knowing the key; naive MAC constructions like H(key || message) are vulnerable.",
+            "An attack that extends the length of the key.",
+            "An attack that only works on messages of a certain length.",
+            "An attack against digital signatures, not MACs."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the difference between a 'chosen-plaintext attack' (CPA) and a 'chosen-ciphertext attack' (CCA)?",
+        "answers": [
+            "In a CPA, the attacker can encrypt chosen plaintexts, while in a CCA, the attacker can also decrypt chosen ciphertexts, making it a more powerful attack model.",
+            "CPA is for symmetric ciphers, and CCA is for asymmetric ciphers.",
+            "CPA targets the encryption algorithm, while CCA targets the decryption algorithm.",
+            "There is no practical difference between the two."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "Why is it insecure to use RSA to sign a message hash directly without a padding scheme like PSS?",
+        "answers": [
+            "It can be vulnerable to existential forgery attacks, where an attacker can create a valid signature for a random message.",
+            "The hash is too small for the RSA operation.",
+            "The signature would be reversible, revealing the hash.",
+            "It is not insecure; padding is optional."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'Galois Field' GF(2^8) used for in AES?",
+        "answers": [
+            "It is the finite field in which the byte-oriented arithmetic for the SubBytes and MixColumns steps is performed.",
+            "It is used to generate the key schedule.",
+            "It is the field of all possible 8-bit numbers.",
+            "It is a field of study in mathematics."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'Sybil attack' in the context of network security?",
+        "answers": [
+            "An attack where a malicious user creates a large number of pseudonymous identities to gain a disproportionately large influence in a peer-to-peer network.",
+            "An attack named after a famous cryptographer.",
+            "An attack that targets the system's billing (Sybil) information.",
+            "A type of side-channel attack."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the purpose of the 'Merkle-Damgård construction' in hash functions?",
+        "answers": [
+            "It is a method for building a collision-resistant hash function from a collision-resistant one-way compression function, allowing it to handle arbitrary-length inputs.",
+            "It is a method for creating digital signatures.",
+            "It is a type of block cipher.",
+            "It is a construction for a public-key cryptosystem."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'rubber-hose cryptanalysis' attack?",
+        "answers": [
+            "An attack where the attacker coerces a victim into revealing a secret key through threats or torture.",
+            "An attack that uses a rubber hose to siphon data from a network cable.",
+            "A type of fault analysis attack.",
+            "A humorous term for a brute-force attack."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the main security goal of a 'commitment scheme'?",
+        "answers": [
+            "To allow a party to commit to a chosen value while keeping it hidden from others, with the ability to reveal the committed value later.",
+            "To commit a key to a specific user.",
+            "A scheme for making legally binding commitments online.",
+            "A type of digital signature."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "In AES, how many rounds are performed for a 128-bit key?",
+        "answers": [
+            "10 rounds",
+            "12 rounds",
+            "14 rounds",
+            "8 rounds"
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'denial-of-service' (DoS) attack?",
+        "answers": [
+            "An attack intended to make a machine or network resource unavailable to its intended users.",
+            "An attack where the service provider denies that a transaction took place.",
+            "An attack that denies the existence of a secret key.",
+            "An attack that targets the operating system."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'Internet Key Exchange' (IKE) protocol used for?",
+        "answers": [
+            "It is the protocol used to set up a security association (SA) in the IPsec protocol suite, often using Diffie-Hellman.",
+            "A protocol for exchanging keys over the internet in general.",
+            "A protocol for managing public keys in a PKI.",
+            "A protocol for exchanging physical keys."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the difference between 'statistical randomness' and 'cryptographic randomness'?",
+        "answers": [
+            "Cryptographic randomness requires that the numbers are not only statistically random but also unpredictable to an attacker.",
+            "Statistical randomness is more random than cryptographic randomness.",
+            "Cryptographic randomness is generated by a computer, while statistical randomness is from natural phenomena.",
+            "There is no difference."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'transposition cipher'?",
+        "answers": [
+            "A cipher that rearranges the order of the plaintext letters without changing the letters themselves.",
+            "A cipher that substitutes each letter with another letter.",
+            "A cipher that uses a matrix transposition.",
+            "A modern, secure type of cipher."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'work factor' of a cryptosystem?",
+        "answers": [
+            "An estimate of the effort (in terms of time and resources) required to break it.",
+            "The amount of work required to implement the cryptosystem.",
+            "A measure of how efficient the cryptosystem is.",
+            "The number of people required to design the cryptosystem."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "In the context of security protocols, what is a 'liveness' property?",
+        "answers": [
+            "A property that ensures the protocol eventually makes progress and does not get stuck indefinitely.",
+            "A property that ensures the parties in the protocol are alive.",
+            "A property related to the freshness of messages.",
+            "A property that ensures the protocol is secure."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'session key'?",
+        "answers": [
+            "A temporary, single-use symmetric key used for encrypting all messages in one communication session.",
+            "A key that is used for multiple sessions.",
+            "A type of public key.",
+            "The master key from which all other keys are derived."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the purpose of a 'key confirmation' step in a key exchange protocol?",
+        "answers": [
+            "To provide assurance to both parties that they have computed the same secret key.",
+            "To confirm the identity of the other party.",
+            "To confirm that the key is strong enough.",
+            "To register the key with a central authority."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'related-key attack'?",
+        "answers": [
+            "A type of cryptanalytic attack where the attacker can observe the operation of a cipher under several different keys whose values are related in some known way.",
+            "An attack that uses a key related to the target's family.",
+            "An attack where the key is related to the plaintext.",
+            "An attack that targets the key schedule."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'bit commitment' scheme?",
+        "answers": [
+            "A cryptographic protocol that allows one to commit to a chosen bit (0 or 1) while keeping it hidden from others, with the ability to reveal the committed bit later.",
+            "A scheme for committing a single bit to memory.",
+            "A hardware device for storing bits.",
+            "A type of error correction code."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'Fiat-Shamir heuristic'?",
+        "answers": [
+            "A technique for converting a public-coin interactive proof system into a non-interactive proof (like a digital signature) by replacing the verifier's random challenges with the output of a cryptographic hash function.",
+            "A method for generating prime numbers.",
+            "A type of block cipher.",
+            "An attack against the Fiat-Shamir signature scheme."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'threshold cryptography' scheme?",
+        "answers": [
+            "A scheme where a secret key is divided among multiple parties, and a certain threshold of parties is required to cooperate to perform a cryptographic operation (like signing or decrypting).",
+            "A scheme where the key must be above a certain threshold of strength.",
+            "A type of cryptography that is on the threshold of being broken.",
+            "A scheme that uses a threshold to determine when to change keys."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'indistinguishability under chosen-plaintext attack' (IND-CPA) security notion?",
+        "answers": [
+            "A security property for a cryptosystem where an attacker, given the encryption of one of two messages they chose, cannot identify which message was encrypted with probability significantly better than random guessing.",
+            "A property where all ciphertexts are indistinguishable from each other.",
+            "A security notion that is easy to achieve.",
+            "A property that only applies to deterministic encryption schemes."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'KDF' (Key Derivation Function)?",
+        "answers": [
+            "A function that takes a source of initial keying material and derives one or more cryptographically secure secret keys from it.",
+            "A function that finds keys.",
+            "A function that deletes keys.",
+            "A type of public key."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "Why is it important to use a cryptographically secure random number generator (CSPRNG) for generating keys?",
+        "answers": [
+            "Because if the key generation is predictable, an attacker can guess the key, rendering the entire cryptosystem insecure.",
+            "To ensure the keys are all different.",
+            "To make the key generation process faster.",
+            "It is not important; any random number generator will do."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'Digital Signature Algorithm' (DSA)?",
+        "answers": [
+            "A U.S. Federal Government standard for digital signatures based on the discrete logarithm problem.",
+            "An algorithm for creating any type of digital signature.",
+            "An alternative to RSA for encryption.",
+            "An outdated signature scheme."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'identity-based encryption' (IBE)?",
+        "answers": [
+            "A type of public-key encryption where a user's public key can be an arbitrary string, such as their email address, eliminating the need for a public key certificate.",
+            "Encryption that is based on the user's identity.",
+            "A system where the key is the user's name.",
+            "A less secure form of public-key encryption."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'block cipher's block size'?",
+        "answers": [
+            "The fixed number of bits that the cipher processes at a time.",
+            "The size of the key.",
+            "The number of blocks in a message.",
+            "A measure of the cipher's security."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'provably secure' cryptosystem?",
+        "answers": [
+            "A cryptosystem whose security can be mathematically proven to be equivalent to the difficulty of a well-known hard problem.",
+            "A cryptosystem that has been proven to be unbreakable.",
+            "A system that has been tested by a security professional.",
+            "A theoretical concept with no practical examples."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'salt' in the context of password hashing?",
+        "answers": [
+            "A random value that is combined with a password before hashing to ensure that identical passwords do not result in the same hash.",
+            "A special character that must be included in a password.",
+            "A secret value stored on the server.",
+            "A method for making passwords taste better."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the purpose of 'salting' a password?",
+        "answers": [
+            "To defeat pre-computed table attacks, such as rainbow table attacks.",
+            "To make the password longer.",
+            "To encrypt the password.",
+            "To make the hash computation faster."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "In the context of TLS, what is the 'pre-master secret'?",
+        "answers": [
+            "A random value generated by the client, encrypted with the server's public key, and used by both parties to derive the master secret.",
+            "The master secret before it is finalized.",
+            "A secret shared between the client and the CA.",
+            "The server's private key."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'key escrow'?",
+        "answers": [
+            "A system where the keys needed to decrypt encrypted data are held in escrow by a trusted third party, so that they can be accessed under certain circumstances.",
+            "A secure container for storing keys.",
+            "A method for generating keys.",
+            "A type of attack against key management systems."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'hash-based message authentication code' (HMAC)?",
+        "answers": [
+            "A specific type of MAC involving a cryptographic hash function and a secret cryptographic key.",
+            "A hash function that is also a MAC.",
+            "A MAC that is based on a block cipher.",
+            "A less secure version of a standard MAC."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'ciphertext-only' attack model?",
+        "answers": [
+            "A model where the attacker is assumed to only have access to a set of ciphertexts.",
+            "An attack that only works on ciphertexts.",
+            "The weakest form of attack.",
+            "Both A and C."
+        ],
+        "correct": 3
+    },
+    {
+        "question": "What is the purpose of a 'key-agreement protocol'?",
+        "answers": [
+            "To allow two or more parties to establish a shared secret key over an insecure channel.",
+            "To agree on which key to use.",
+            "A protocol for signing keys.",
+            "A protocol for managing a key database."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'anonymity' in the context of security services?",
+        "answers": [
+            "A service that conceals the identity of a user or the relationship between communicating parties.",
+            "A service that makes all users anonymous.",
+            "A feature of a cryptosystem that makes it hard to analyze.",
+            "A type of attack."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'pseudonym'?",
+        "answers": [
+            "An identifier for a user other than their real name, used to provide a degree of anonymity.",
+            "A fake name.",
+            "A type of cryptographic key.",
+            "A character in a cryptographic protocol."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'traffic analysis'?",
+        "answers": [
+            "The process of intercepting and examining messages in order to deduce information from patterns in communication, even if the messages are encrypted.",
+            "The analysis of road traffic.",
+            "A method for breaking encryption.",
+            "A type of side-channel attack."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'covert channel'?",
+        "answers": [
+            "A communication channel that allows a process to transfer information in a way that violates the system's security policy.",
+            "A secret communication channel.",
+            "A channel that is used for covert operations.",
+            "A type of encrypted channel."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'principle of open design' in cryptography?",
+        "answers": [
+            "The principle that the security of a cryptosystem should not depend on the secrecy of its design or implementation (related to Kerckhoffs's principle).",
+            "The principle that all cryptographic designs should be open source.",
+            "A principle that encourages collaboration in design.",
+            "A principle that is no longer relevant."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'one-time signature' scheme?",
+        "answers": [
+            "A digital signature scheme where a key pair can only be used to sign a single message.",
+            "A signature that is only valid for one-time use.",
+            "A less secure form of digital signature.",
+            "A signature that does not require a key."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'group signature' scheme?",
+        "answers": [
+            "A scheme that allows a member of a group to anonymously sign a message on behalf of the group.",
+            "A signature that is signed by a group of people.",
+            "A scheme where the key is shared among a group.",
+            "A type of threshold signature."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'ring signature' scheme?",
+        "answers": [
+            "A type of digital signature where a message is signed by a member of a group of users, but the verifier cannot determine which member actually produced the signature.",
+            "A signature that is in the shape of a ring.",
+            "A signature that is passed around a ring of users.",
+            "A less common type of group signature."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'blind signature' scheme?",
+        "answers": [
+            "A scheme where a message is signed by an authority without them knowing the content of the message, often used in privacy-preserving applications like digital cash.",
+            "A signature that is created by a blind person.",
+            "A signature that is hard to see.",
+            "An insecure type of signature."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'attribute-based encryption' (ABE)?",
+        "answers": [
+            "A type of public-key encryption in which the secret key of a user and the ciphertext are dependent upon attributes (e.g. the country they live in, or the kind of subscription they have).",
+            "Encryption that is based on the attributes of the data.",
+            "A system where keys are replaced by attributes.",
+            "A more complex form of identity-based encryption."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'broadcast encryption' scheme?",
+        "answers": [
+            "A scheme that allows a sender to securely broadcast a message to a select group of users out of a larger population, such that only the intended users can decrypt it.",
+            "A scheme for encrypting broadcast television signals.",
+            "A system where the key is broadcast to everyone.",
+            "An insecure method of communication."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'searchable encryption' scheme?",
+        "answers": [
+            "A scheme that allows a user to search over encrypted data without revealing the search query or the data to the server holding the data.",
+            "A scheme for encrypting search engine queries.",
+            "A system that makes encrypted data easy to find.",
+            "A theoretical concept that is not yet practical."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'plausible deniability' in cryptography?",
+        "answers": [
+            "A property of a system that allows a user to plausibly deny having sent a message or performed an action, even if they did.",
+            "The ability to deny that a system is secure.",
+            "A weakness in a non-repudiation system.",
+            "A feature of steganography."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'keyed permutation'?",
+        "answers": [
+            "A permutation of a set of elements that is determined by a secret key. A block cipher is an example of a keyed permutation.",
+            "A permutation that has a key.",
+            "A mathematical function.",
+            "A type of hash function."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'sponge construction' for a hash function?",
+        "answers": [
+            "A method for building a hash function from a fixed-length permutation, used in the SHA-3 standard. It 'absorbs' the input data and then 'squeezes' out the hash output.",
+            "A construction that uses a sponge to absorb data.",
+            "A less secure alternative to the Merkle-Damgård construction.",
+            "A type of stream cipher."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'collision attack' on a hash function?",
+        "answers": [
+            "An attack where the goal is to find two different inputs that produce the same hash output.",
+            "An attack that causes a hash function to collide with another program.",
+            "An attack that targets the collision resistance property.",
+            "Both A and C."
+        ],
+        "correct": 3
+    },
+    {
+        "question": "What is a 'preimage attack' on a hash function?",
+        "answers": [
+            "An attack where, given a hash output, the goal is to find an input that produces that hash.",
+            "An attack that targets the image before it is hashed.",
+            "An attack that is easier than a collision attack.",
+            "An attack against image hashing algorithms."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'second preimage attack' on a hash function?",
+        "answers": [
+            "An attack where, given an input and its hash, the goal is to find a different input that produces the same hash.",
+            "An attack that finds the second preimage of a hash.",
+            "A more difficult version of a preimage attack.",
+            "An attack that requires two hashes."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'time-lock puzzle' in cryptography?",
+        "answers": [
+            "A type of cryptographic puzzle that requires a specific amount of time to solve, even with parallel computation, used to ensure a piece of data cannot be accessed before a certain time.",
+            "A puzzle that is locked by a timer.",
+            "A game played by cryptographers.",
+            "A method for securing time-sensitive data."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'random oracle model' in cryptographic proofs?",
+        "answers": [
+            "An idealized model where a cryptographic hash function is assumed to behave like a truly random function. Proofs in this model are heuristic but can provide evidence of a scheme's security.",
+            "A model where a random oracle provides answers to cryptographic problems.",
+            "A model that is not used in practice.",
+            "A model for generating random numbers."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'distinguishing attack' against a cipher?",
+        "answers": [
+            "An attack where the goal is to distinguish the output of the cipher from a truly random sequence of bits.",
+            "An attack that distinguishes between different keys.",
+            "An attack that can only be performed by a distinguished cryptographer.",
+            "A very powerful type of attack."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'security parameter' in a cryptosystem?",
+        "answers": [
+            "A value that determines the security level of the system, such as the key length or the size of the modulus.",
+            "A parameter that must be kept secret.",
+            "A measure of how secure the system is.",
+            "A parameter that is used to test the security of the system."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'hard-core predicate' of a one-way function?",
+        "answers": [
+            "A function that, given the output of a one-way function, is hard to compute, but easy to compute if the input is also known. It's used to build pseudorandom generators.",
+            "A very difficult mathematical statement.",
+            "A predicate that is hard to prove.",
+            "A property of a secure hash function."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'pseudorandom function' (PRF)?",
+        "answers": [
+            "A function that takes a key and an input, and produces an output that is indistinguishable from a truly random function.",
+            "A function that is almost random.",
+            "A type of hash function.",
+            "A function used in pseudocode."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'pseudorandom permutation' (PRP)?",
+        "answers": [
+            "A pseudorandom function that is also a permutation (i.e., it is invertible). A block cipher is modeled as a PRP.",
+            "A permutation that is almost random.",
+            "A type of transposition cipher.",
+            "A permutation of a set of keys."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is the 'Luby-Rackoff' construction?",
+        "answers": [
+            "A construction that shows how to build a pseudorandom permutation (like a block cipher) from a pseudorandom function, forming the basis for Feistel ciphers.",
+            "A construction for a hash function.",
+            "A type of digital signature.",
+            "A method for key exchange."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'message-locked encryption' (MLE) scheme?",
+        "answers": [
+            "An encryption scheme where the key is derived from the message itself, used for data deduplication. It is not secure for confidential data.",
+            "An encryption scheme where the message is locked.",
+            "A type of symmetric encryption.",
+            "A highly secure form of encryption."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'format-preserving encryption' (FPE)?",
+        "answers": [
+            "A type of encryption where the ciphertext has the same format as the plaintext, for example, encrypting a credit card number results in a sequence of digits of the same length.",
+            "Encryption that preserves the file format.",
+            "A less secure form of encryption.",
+            "Encryption that is used for formatting documents."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'tweakable block cipher'?",
+        "answers": [
+            "A type of block cipher that takes an additional public input called a 'tweak' along with the key and plaintext, allowing for variation in the encryption without changing the key.",
+            "A block cipher that can be easily modified.",
+            "A cipher that has a small weakness or 'tweak'.",
+            "A more efficient type of block cipher."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'all-or-nothing transform' (AONT)?",
+        "answers": [
+            "A transformation that is not encryption itself, but is applied before encryption, such that you must have all of the transformed data to reverse the process. It makes brute-force attacks more difficult.",
+            "A transform that either works or it doesn't.",
+            "A type of hash function.",
+            "A method for data compression."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'secret sharing'?",
+        "answers": [
+            "A method for distributing a secret amongst a group of participants, each of whom is allocated a share of the secret. The secret can be reconstructed only when a sufficient number of shares are combined.",
+            "Sharing secrets with friends.",
+            "A type of group chat.",
+            "A method for encrypting secrets."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'Shamir's Secret Sharing' scheme?",
+        "answers": [
+            "A specific secret sharing scheme based on polynomial interpolation, where a secret is encoded as a point on a polynomial, and shares are other points on the same polynomial.",
+            "A scheme invented by Adi Shamir for sharing RSA keys.",
+            "A less secure form of secret sharing.",
+            "A scheme that is easy to break."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'visual cryptography' scheme?",
+        "answers": [
+            "A cryptographic technique which allows visual information (pictures, text, etc.) to be encrypted in such a way that decryption can be performed by the human visual system, without the aid of computers.",
+            "A scheme for encrypting images.",
+            "A type of steganography.",
+            "A scheme that is based on optical illusions."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is 'deniable encryption'?",
+        "answers": [
+            "A form of encryption that allows the sender of an encrypted message to deny sending it, by providing a different 'fake' key that decrypts the ciphertext into a different, plausible plaintext.",
+            "Encryption that can be denied.",
+            "An insecure form of encryption.",
+            "A type of encryption used by spies."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'kleptographic attack'?",
+        "answers": [
+            "A type of attack where a cryptosystem is designed to secretly leak key information through its public outputs, such as public keys or digital signatures.",
+            "An attack performed by a kleptomaniac.",
+            "An attack that steals the entire cryptosystem.",
+            "A type of side-channel attack."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'watermarking' scheme in the context of digital security?",
+        "answers": [
+            "A scheme for embedding a hidden marker in a digital signal or document to identify its ownership or authenticity.",
+            "A scheme for adding a visible watermark to an image.",
+            "A type of steganography.",
+            "A method for detecting forgeries."
+        ],
+        "correct": 0
+    },
+    {
+        "question": "What is a 'fingerprinting' scheme in digital security?",
+        "answers": [
+            "A scheme where unique marks are embedded in each distributed copy of a work, so that if a copy is leaked, the source of the leak can be identified.",
+            "A scheme that uses a user's fingerprint for authentication.",
+            "A method for identifying files based on their hash.",
+            "A type of digital signature."
+        ],
+        "correct": 0
     }
 ];
 
