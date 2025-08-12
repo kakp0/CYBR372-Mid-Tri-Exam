@@ -531,109 +531,14 @@ displayLeaderboard(leaderboardData) {
     },
     
     loadQuestions() {
-        this.quiz.questions = [
-            {
-                question: "What is the primary purpose of encryption in cybersecurity?",
-                answers: [
-                    "To increase data processing speed",
-                    "To protect data confidentiality",
-                    "To reduce storage requirements",
-                    "To improve network performance"
-                ],
-                correct: 1
-            },
-            {
-                question: "Which of the following is a common type of malware that encrypts files and demands payment?",
-                answers: [
-                    "Virus",
-                    "Trojan",
-                    "Ransomware",
-                    "Spyware"
-                ],
-                correct: 2
-            },
-            {
-                question: "What does the acronym 'CIA' stand for in cybersecurity?",
-                answers: [
-                    "Central Intelligence Agency",
-                    "Confidentiality, Integrity, Availability",
-                    "Cyber Incident Analysis",
-                    "Critical Infrastructure Assessment"
-                ],
-                correct: 1
-            },
-            {
-                question: "Which authentication method requires something you know, something you have, and something you are?",
-                answers: [
-                    "Single-factor authentication",
-                    "Two-factor authentication",
-                    "Multi-factor authentication",
-                    "Biometric authentication"
-                ],
-                correct: 2
-            },
-            {
-                question: "What is a 'phishing' attack?",
-                answers: [
-                    "A type of denial-of-service attack",
-                    "An attempt to trick users into revealing sensitive information",
-                    "A malware that spreads through networks",
-                    "An attack that exploits software vulnerabilities"
-                ],
-                correct: 1
-            },
-            {
-                question: "Which protocol is commonly used for secure web browsing?",
-                answers: [
-                    "HTTP",
-                    "FTP",
-                    "HTTPS",
-                    "SMTP"
-                ],
-                correct: 2
-            },
-            {
-                question: "What is the purpose of a firewall in network security?",
-                answers: [
-                    "To encrypt data transmissions",
-                    "To monitor and control network traffic",
-                    "To store user credentials",
-                    "To generate security reports"
-                ],
-                correct: 1
-            },
-            {
-                question: "Which of the following is a best practice for password security?",
-                answers: [
-                    "Use the same password for all accounts",
-                    "Share passwords with trusted colleagues",
-                    "Use strong, unique passwords for each account",
-                    "Write passwords on sticky notes"
-                ],
-                correct: 2
-            },
-            {
-                question: "What is 'social engineering' in cybersecurity?",
-                answers: [
-                    "Automated security testing",
-                    "Psychological manipulation to gain information",
-                    "Network infrastructure design",
-                    "Software development methodology"
-                ],
-                correct: 1
-            },
-            {
-                question: "Which type of attack involves flooding a system with traffic to make it unavailable?",
-                answers: [
-                    "Phishing",
-                    "Malware",
-                    "Denial-of-Service (DoS)",
-                    "Man-in-the-middle"
-                ],
-                correct: 2
-            }
-        ];
-        console.log('Questions loaded:', this.quiz.questions.length);
+        // This function now just verifies that the question bank from questions.js is available.
+        // The actual selection of questions for a quiz happens in startQuiz().
+        if (typeof window.sampleQuestions !== 'undefined') {
+            console.log(`Question bank with ${window.sampleQuestions.length} questions is available.`);
+        } else {
+            console.error('Question bank (questions.js) not found. Please ensure it is loaded before script.js.');
+            this.showNotification('Error: Question bank could not be loaded.', 'error');
+        }
     },
     
     // =============================================
@@ -1074,10 +979,32 @@ getRankEmoji(rank) {
     },
     
     startQuiz() {
+        if (typeof window.sampleQuestions === 'undefined' || window.sampleQuestions.length === 0) {
+            this.showNotification('No questions available to start the quiz.', 'error');
+            return;
+        }
+
+        // Shuffle the main question bank and select 50 for the quiz round
+        const shuffledBank = this.shuffleArray([...window.sampleQuestions]);
+        this.quiz.questions = shuffledBank.slice(0, 50);
+
+        if (this.quiz.questions.length < 50) {
+            console.warn(`Warning: Only ${this.quiz.questions.length} questions available, less than the desired 50.`);
+            this.showNotification(`Warning: Quiz started with only ${this.quiz.questions.length} questions.`, 'warning');
+        }
+        
         this.quiz.isActive = true;
         this.quiz.currentQuestion = 0;
         this.quiz.userAnswers = [];
+        this.quiz.isComplete = false; // Ensure isComplete is reset
         this.user.sessionQuestions = 0; // Reset session counter
+
+        // Hide results, show quiz content
+        const quizContent = document.querySelector('.quiz-content');
+        const quizResults = document.getElementById('quizResults');
+        if (quizContent) quizContent.style.display = 'block';
+        if (quizResults) quizResults.style.display = 'none';
+
         this.renderCurrentQuestion();
     },
     
@@ -1244,20 +1171,10 @@ getRankEmoji(rank) {
     },
     
     restartQuiz() {
-        this.quiz.currentQuestion = 0;
-        this.quiz.userAnswers = [];
         this.quiz.isComplete = false;
         this.quiz.isActive = false;
-        
-        // Hide results, show quiz content
-        const quizContent = document.querySelector('.quiz-content');
-        const quizResults = document.getElementById('quizResults');
-        
-        if (quizContent) quizContent.style.display = 'block';
-        if (quizResults) quizResults.style.display = 'none';
-        
-        // Restart the quiz
-        this.showSection('quiz');
+        // Calling startQuiz will handle resetting state and getting new questions
+        this.startQuiz();
     },
     
     showQuizResults() {
