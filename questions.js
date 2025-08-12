@@ -467,7 +467,7 @@ const sampleQuestions = [
         "answers": [
             "CBC mode.",
             "CTR mode.",
-            "GCM (Galois/Counter Mode).",
+            "GCM mode.",
             "ECB mode."
         ],
         "correct": 2
