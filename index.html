@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CYBR372 Mid Trimester Practice Test</title>
     <meta name="description" content="CYBR372 Mid Tri Exam Practice">
-<link rel="stylesheet" href="style.css?v=16898747742">
+<link rel="stylesheet" href="style.css?v=16898784404">
 </head>
 <body>
     <div class="app-container">
@@ -83,10 +83,6 @@
                                 <label class="info-label">Userame</label>
                                 <input type="text" id="playerNameInput" class="info-input" placeholder="Enter a username" maxlength="20">
                             </div>
-
-                            <button class="save-profile-btn" id="saveProfileBtn" onclick="app.saveProfile()">
-                                Save Profile
-                            </button>
                             
                             <div class="info-row">
                                 <label class="info-label">Current Rank</label>
@@ -116,7 +112,9 @@
                                 </div>
                             </div>
                             
-
+                            <button class="save-profile-btn" id="saveProfileBtn" onclick="app.saveProfile()">
+                                Save Profile
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -292,7 +290,9 @@
     </div>
 
     <!-- Scripts -->
-<script src="script.js?v=16898747742"></script>
+    <!-- IMPORTANT: Load questions.js BEFORE script.js -->
+    <script src="questions.js?v=16898784404"></script>
+    <script src="script.js?v=16898784404"></script>
     
     <!-- Firebase Integration (Optional) -->
     <!-- Uncomment and configure when ready to use Firebase -->
