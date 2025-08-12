@@ -1161,7 +1161,10 @@ input:checked + .toggle-slider:before {
     animation: pulse 2s infinite;
 }
 
-/* Responsive Design */
+/* ============================================= */
+/* RESPONSIVE DESIGN FOR MOBILE                  */
+/* ============================================= */
+
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -1213,11 +1216,11 @@ input:checked + .toggle-slider:before {
         grid-template-columns: 1fr;
     }
     
-    .results-stats {
+    .final-stats {
         grid-template-columns: 1fr;
     }
     
-    .results-actions {
+    .quiz-actions {
         flex-direction: column;
     }
     
@@ -1238,10 +1241,48 @@ input:checked + .toggle-slider:before {
     .notification-container {
         left: 20px;
         right: 20px;
+        top: 10px;
     }
     
     .notification {
         min-width: auto;
+    }
+
+    /* MOBILE-FRIENDLY: Stack quiz stats bar vertically */
+    .quiz-stats-bar {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 0.75rem;
+    }
+
+    .quiz-stats-bar .stat-item {
+        padding: 0.5rem;
+    }
+
+    /* MOBILE-FRIENDLY: Make leaderboard items vertical cards */
+    .leaderboard-item {
+        flex-direction: column;
+        align-items: center; /* Center content in the card */
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .leaderboard-info {
+        flex-direction: column;
+        align-items: center; /* Center name and score block */
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .leaderboard-score {
+        flex-direction: column; /* Stack score details vertically */
+        align-items: center;
+        gap: 0.25rem;
+        margin-top: 0.5rem;
+    }
+
+    .leaderboard-total-questions {
+        margin-left: 0; /* Remove side margin for centered layout */
     }
 }
 
@@ -1251,8 +1292,13 @@ input:checked + .toggle-slider:before {
     }
     
     .nav-container {
+        justify-content: flex-start; /* Allow scrolling from the start */
         overflow-x: scroll;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+    }
+    .nav-container::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
     }
     
     .question-container {
@@ -1263,6 +1309,15 @@ input:checked + .toggle-slider:before {
     
     .question-number {
         margin-bottom: 1rem;
+    }
+
+    .question-text {
+        font-size: 1.1rem;
+    }
+
+    .answer-btn {
+        padding: 1rem;
+        font-size: 0.9rem;
     }
 }
 
