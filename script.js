@@ -97,6 +97,35 @@ config: {
         
         return userId;
     },
+
+    // =============================================
+    // RATE LIMITING
+    // =============================================
+    
+    rateLimiter: {
+        requestTimestamps: [],
+        limit: 20, // Max requests
+        interval: 60 * 1000 // Per 1 minute (in milliseconds)
+    },
+
+    isRequestAllowed() {
+        const now = Date.now();
+        
+        // Clear out timestamps older than the interval
+        this.rateLimiter.requestTimestamps = this.rateLimiter.requestTimestamps.filter(
+            timestamp => now - timestamp < this.rateLimiter.interval
+        );
+
+        if (this.rateLimiter.requestTimestamps.length >= this.rateLimiter.limit) {
+            console.warn('Rate limit exceeded. Request blocked.');
+            this.showNotification('You are making too many requests. Please wait a moment.', 'error');
+            return false;
+        }
+
+        // Record the new request timestamp
+        this.rateLimiter.requestTimestamps.push(now);
+        return true;
+    },
     
     // =============================================
     // REAL-TIME STAT UPDATES
@@ -272,6 +301,7 @@ initializeFirebase() {
 },
 
     async createUserDocument(userId) {
+        if (!this.isRequestAllowed()) return;
         if (!this.firebase || !this.firebase.db) {
             console.warn('Firebase db not available');
             return;
@@ -302,6 +332,7 @@ initializeFirebase() {
     },
 
     async loadUserDataFromFirebase(userId) {
+        if (!this.isRequestAllowed()) return;
         if (!this.firebase || !this.firebase.db) {
             console.warn('Firebase db not available');
             return;
@@ -331,6 +362,7 @@ initializeFirebase() {
     },
 
 async updateUserInFirebase() {
+    if (!this.isRequestAllowed()) return;
     if (!this.firebase || !this.firebase.isConfigured || !this.firebase.db || !this.user.id) {
         return; // Also check if user.id exists
     }
@@ -361,6 +393,7 @@ async updateUserInFirebase() {
 
     // script.js
 async updateLeaderboardInFirebase() {
+    if (!this.isRequestAllowed()) return;
     if (!this.firebase || !this.firebase.isConfigured || !this.firebase.db || !this.user.id) {
         return;
     }
@@ -387,6 +420,7 @@ async updateLeaderboardInFirebase() {
 
     // script.js (inside the app object)
     async loadLeaderboardFromFirebase() {
+        if (!this.isRequestAllowed()) return;
         if (!this.firebase.isConfigured || !this.firebase.db) {
             this.showNotification('Leaderboard is offline.', 'error');
             return;
