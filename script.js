@@ -388,27 +388,51 @@ async updateLeaderboardInFirebase() {
 },
 
     // script.js (inside the app object)
-async loadLeaderboardFromFirebase() {
-    if (!this.firebase.isConfigured || !this.firebase.db) {
-        this.showNotification('Leaderboard is offline.', 'error');
-        return;
-    }
+    async loadLeaderboardFromFirebase() {
+        if (!this.firebase.isConfigured || !this.firebase.db) {
+            this.showNotification('Leaderboard is offline.', 'error');
+            return;
+        }
 
-    try {
-        const leaderboardRef = this.firebase.db.collection('leaderboard')
-            .orderBy('accuracy', 'desc')
-            .limit(50);
+        try {
+            // Fetch from leaderboard collection without server-side ordering
+            const leaderboardRef = this.firebase.db.collection('leaderboard').limit(100); // Fetch more to sort client-side
 
-        const snapshot = await leaderboardRef.get();
-        const leaderboardData = snapshot.docs.map(doc => doc.data());
+            const snapshot = await leaderboardRef.get();
+            let leaderboardData = snapshot.docs.map(doc => doc.data());
 
-        this.displayLeaderboard(leaderboardData);
-        console.log('Leaderboard loaded from Firebase');
-    } catch (error) {
-        console.error('Error loading leaderboard from Firebase:', error);
-        this.showNotification('Could not load leaderboard.', 'error');
-    }
-},
+            // Implement custom sorting logic
+            leaderboardData.sort((a, b) => {
+                const aIsUnranked = a.rank === 'Unranked';
+                const bIsUnranked = b.rank === 'Unranked';
+
+                // Rule 1: Unranked players always go to the bottom
+                if (aIsUnranked && !bIsUnranked) {
+                    return 1; // a is greater (comes after) b
+                }
+                if (!aIsUnranked && bIsUnranked) {
+                    return -1; // a is smaller (comes before) b
+                }
+                
+                // If both are ranked or both are unranked, apply next rules.
+
+                // Rule 2: Sort by accuracy (descending)
+                if (b.accuracy !== a.accuracy) {
+                    return b.accuracy - a.accuracy;
+                }
+
+                // Rule 3: If accuracy is tied, sort by total questions answered (descending)
+                return b.totalQuestions - a.totalQuestions;
+            });
+
+            // We can limit the final display here if needed, e.g., .slice(0, 50)
+            this.displayLeaderboard(leaderboardData.slice(0, 50));
+            console.log('Leaderboard loaded and sorted from Firebase');
+        } catch (error) {
+            console.error('Error loading leaderboard from Firebase:', error);
+            this.showNotification('Could not load leaderboard.', 'error');
+        }
+    },
 
     // script.js
 // script.js
