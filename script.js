@@ -391,6 +391,35 @@ async updateUserInFirebase() {
         }
     },
 
+    // Add this new function inside your app object in script.js
+
+async deleteUserFromFirebase() {
+    if (!this.firebase || !this.firebase.isConfigured || !this.user.id) {
+        console.warn('Firebase not configured or user ID is missing. Cannot delete from DB.');
+        return; // Exit if Firebase isn't ready or there's no user ID
+    }
+
+    const userId = this.user.id;
+    console.log(`Attempting to delete user ${userId} from Firebase...`);
+
+    try {
+        // Create references to the documents you want to delete
+        const userDocRef = this.firebase.db.collection('users').doc(userId);
+        const leaderboardDocRef = this.firebase.db.collection('leaderboard').doc(userId);
+
+        // Delete the documents
+        await userDocRef.delete();
+        await leaderboardDocRef.delete();
+
+        console.log(`Successfully deleted user and leaderboard data for ${userId} from Firebase.`);
+        this.showNotification('Profile successfully deleted from the database.', 'success');
+
+    } catch (error) {
+        console.error('Error deleting user data from Firebase:', error);
+        this.showNotification('Could not delete profile from the database.', 'error');
+    }
+},
+
     // script.js
 async updateLeaderboardInFirebase() {
     if (!this.isRequestAllowed()) return;
@@ -1391,32 +1420,48 @@ refreshLeaderboard() {
         this.showNotification('Data exported successfully!', 'success');
     },
     
-    resetProgress() {
-        if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
-            this.user = {
-                name: this.user.name,
-                rank: 'Unranked',
-                accuracy: 0,
-                totalQuestions: 0,
-                correctAnswers: 0,
-                questionHistory: [], 
+    // Replace the existing resetProgress function with this one
 
-                isProfileComplete: this.user.isProfileComplete
-            };
-            this.quiz = {
-                currentQuestion: 0,
-                questions: this.quiz.questions,
-                userAnswers: [],
-                isComplete: false,
-                isActive: false,
-                settings: this.quiz.settings
-            };
-            this.saveUserData();
-            this.updateUI();
-            this.showNotification('Progress reset successfully', 'success');
-            this.showSection('profile');
+async resetProgress() {
+    if (confirm('Are you sure you want to reset all progress? This will permanently delete your profile and leaderboard stats from the database and cannot be undone.')) {
+        
+        // ==> 1. Call the new function to delete from the database
+        await this.deleteUserFromFirebase();
+
+        // ==> 2. Reset the local user object (with the previous fix)
+        this.user = {
+            name: this.user.name,
+            rank: 'Unranked',
+            accuracy: 0,
+            totalQuestions: 0,
+            correctAnswers: 0,
+            questionHistory: [], // The bug fix is included here
+            isProfileComplete: this.user.isProfileComplete,
+            id: this.user.id // Keep the user's anonymous ID
+        };
+        
+        this.quiz = {
+            currentQuestion: 0,
+            questions: this.quiz.questions,
+            userAnswers: [],
+            isComplete: false,
+            isActive: false,
+            settings: this.quiz.settings,
+            currentAnswerMap: []
+        };
+        
+        // ==> 3. Save the cleared local data and update the screen
+        this.saveUserData();
+        this.updateUI();
+        this.showNotification('Local progress has been reset.', 'info');
+        this.showSection('profile');
+        
+        // ==> 4. Optionally, refresh the leaderboard to show the change
+        if (this.ui.currentSection === 'leaderboard') {
+            this.refreshLeaderboard();
         }
-    },
+    }
+},
     
     // =============================================
     // UTILITY FUNCTIONS
