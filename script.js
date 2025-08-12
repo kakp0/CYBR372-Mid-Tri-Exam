@@ -1399,6 +1399,8 @@ refreshLeaderboard() {
                 accuracy: 0,
                 totalQuestions: 0,
                 correctAnswers: 0,
+                questionHistory: [], 
+
                 isProfileComplete: this.user.isProfileComplete
             };
             this.quiz = {
