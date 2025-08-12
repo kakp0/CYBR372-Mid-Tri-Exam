@@ -103,40 +103,38 @@ config: {
     // =============================================
     
     // script.js
-updateLiveStats() {
-    // This now calculates the rolling accuracy instead of session accuracy
-    const newAccuracy = this.calculateRollingAccuracy();
+    updateLiveStats() {
+        // This now calculates the rolling accuracy instead of session accuracy
+        const newAccuracy = this.calculateRollingAccuracy();
 
-    const liveAccuracy = document.getElementById('liveAccuracy');
-    if (liveAccuracy) {
-        const oldAccuracy = parseFloat(liveAccuracy.textContent) || 0;
+        const liveAccuracy = document.getElementById('liveAccuracy');
+        if (liveAccuracy) {
+            const oldAccuracy = parseFloat(liveAccuracy.textContent) || 0;
 
-        // Show accuracy change animation
-        this.showAccuracyChange(oldAccuracy, newAccuracy);
+            // Show accuracy change animation
+            this.showAccuracyChange(oldAccuracy, newAccuracy);
 
-        // Update the display with animation
-        liveAccuracy.style.transition = 'all 0.5s ease';
-        liveAccuracy.textContent = `${newAccuracy.toFixed(1)}%`;
-    }
+            // Update the display with animation
+            liveAccuracy.style.transition = 'all 0.5s ease';
+            liveAccuracy.textContent = `${newAccuracy.toFixed(1)}%`;
+        }
 
-    // Update user's overall stats (this is for local use, not what's displayed)
-    this.user.accuracy = newAccuracy;
-    this.user.rank = this.getQualifiedRank();
+        // Update user's overall stats (this is for local use, not what's displayed)
+        this.user.accuracy = newAccuracy;
+        this.user.rank = this.getQualifiedRank();
 
-    // Update all UI elements
-    this.updateRankingProgress();
-    this.updateLiveRankDisplay();
-    this.updateHeader();
-    this.updateProfile();
-    this.saveUserData();
+        // Update all UI elements
+        this.updateRankingProgress();
+        this.updateLiveRankDisplay();
+        this.updateHeader();
+        this.updateProfile();
+        this.saveUserData(); // Save to localStorage frequently
 
-    // Update Firebase if configured
-    if (this.firebase && this.firebase.isConfigured) {
-        this.updateUserInFirebase();
-    }
-    this.updateRankBasedTheme(); 
+        // **REMOVED**: The call to updateUserInFirebase() is removed from here
+        // to prevent updating on every single question.
 
-},
+        this.updateRankBasedTheme();
+    },
     
     updateRankingProgress() {
         const rankingProgress = document.getElementById('rankingProgress');
@@ -1155,6 +1153,14 @@ getRankEmoji(rank) {
         // Update live stats immediately
         this.updateLiveStats();
         
+        // **ADDED**: Batch Firebase updates every 10 questions for efficiency
+        if (this.user.sessionQuestions > 0 && this.user.sessionQuestions % 10 === 0) {
+            if (this.firebase && this.firebase.isConfigured) {
+                this.updateUserInFirebase();
+                this.showNotification('Progress synced to the cloud!', 'info');
+            }
+        }
+
         // Disable all answer buttons
         const answerBtns = document.querySelectorAll('.answer-btn');
         answerBtns.forEach((btn, index) => {
@@ -1223,6 +1229,11 @@ getRankEmoji(rank) {
         
         // Save data
         this.saveUserData();
+
+        // **ADDED**: Final, guaranteed Firebase update at the end of the quiz
+        if (this.firebase && this.firebase.isConfigured) {
+            this.updateUserInFirebase();
+        }
         
         // Reset session counter for next quiz
         this.user.sessionQuestions = 0;
