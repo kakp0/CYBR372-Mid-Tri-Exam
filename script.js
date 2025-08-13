@@ -41,7 +41,7 @@ const app = {
     firebase: {
 // script.js
 config: {
-    apiKey: 'AIzaSyBtpTMa10YEOE_Q789s7dtUu6kThi31fBI',
+    apiKey: 'AIzaSyDv21G0VLdJhKJ5WGdDSNHPTJYQQyjCg1U',
     authDomain: 'cybr372-practice-test-ecfc5.firebaseapp.com',
     projectId: 'cybr372-practice-test-ecfc5',
     storageBucket: 'cybr372-practice-test-ecfc5.firebasestorage.app',
